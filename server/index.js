@@ -6,6 +6,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 
+const userRoutes = require("./account/userRoute"); //bring in our user routes
+const productRoutes = require("./product/productRoute"); //bring in our product routes
+
 app.use(cors()); // configure cors
 //configure body parser
 app.use(bodyParser.urlencoded({
@@ -24,8 +27,9 @@ app.get("/api", (req, res) => {
     console.log("Hello MEAN Soldier...Ready For Battle??");
 });
 
-const userRoutes = require("./account/userRoute"); //bring in our user routes
 app.use("/user", userRoutes);
+
+app.use("/product", productRoutes)
 
 app.listen(PORT, () => {
     console.log(`App is running on ${PORT}`);
