@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { userInfo } from 'os';
 
 @Component({
   selector: 'app-admin-side',
@@ -7,7 +6,14 @@ import { userInfo } from 'os';
   styleUrls: ['./admin-side.component.scss'],
 })
 export class AdminSideComponent implements OnInit {
+  name = '';
+  email = '';
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const user = JSON.parse(localStorage.getItem('UserInfo'));
+    console.log(user)
+    this.name = user.name;
+    this.email = user.email;
+  }
 }
