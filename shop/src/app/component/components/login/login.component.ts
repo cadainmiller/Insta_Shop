@@ -7,6 +7,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -45,10 +46,14 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('Token', data.token);
         //this.router.navigateByUrl('/');
       },
-      (error: any) => {
+      (err: HttpErrorResponse) => {
         this.submitted = true;
-        console.log(error);
-        this.errorMessage = 'Email or Password incorrect.';
+        console.log(err.error);
+        if (err.error.msg) {
+          this.errorMessage = err.error.msg;
+        } else {
+          this.errorMessage = 'Something Went Wrong!';
+        }
       }
     );
   }
