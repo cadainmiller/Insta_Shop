@@ -42,13 +42,13 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(this.loginForm.value).subscribe(
       (data) => {
         console.log(data);
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('Token', data.token);
         //this.router.navigateByUrl('/');
       },
       (error: any) => {
         this.submitted = true;
         console.log(error);
-        this.errorMessage = 'Email or Password incorrect.' + error;
+        this.errorMessage = 'Email or Password incorrect.';
       }
     );
   }

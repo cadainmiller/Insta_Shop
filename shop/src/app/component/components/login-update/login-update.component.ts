@@ -51,6 +51,7 @@ export class LoginUpdateComponent implements OnInit {
       },
       (error: any) => {
         this.submitted = true;
+        console.log(error);
         this.errorMessage = 'Email or Password incorrect.';
       }
     );

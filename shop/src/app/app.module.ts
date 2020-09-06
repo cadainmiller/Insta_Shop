@@ -41,6 +41,15 @@ import { HttpConfigInterceptor } from './component/interceptor/httpconfig.interc
     ReactiveFormsModule,
     HttpClientModule,
   ],
+  // providers: [
+  //   HttpClientModule,
+  //   // {
+  //   //   provide: HTTP_INTERCEPTORS,
+  //   //   useClass: HttpConfigInterceptor,
+  //   //   multi: true,
+  //   // },
+  // ],
+
   providers: [
     HttpClientModule,
     {
