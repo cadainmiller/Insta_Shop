@@ -5,12 +5,16 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './component/shared/shared.module';
 import { MainComponent } from './component/components/main/main.component';
 import { ProductComponent } from './component/components/pages/product/product.component';
+import { DashboardComponent } from './component/components/dashboard/dashboard.component';
+import { AdminPanelComponent } from './component/components/pages/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     ProductComponent,
+    DashboardComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,

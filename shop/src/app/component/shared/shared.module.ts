@@ -4,12 +4,16 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { AdminSideComponent } from './admin-component/admin-side/admin-side.component';
+import { AdminNavbarComponent } from './admin-component/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
+    AdminSideComponent,
+    AdminNavbarComponent,
   ],
   imports: [CommonModule, RouterModule],
 
@@ -17,6 +21,8 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
+    AdminSideComponent,
+    AdminNavbarComponent,
   ],
 
   entryComponents: [],
