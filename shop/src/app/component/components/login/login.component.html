@@ -1,0 +1,83 @@
+<div class="global-container">
+  <div class="card login-form">
+    <div class="card-body">
+      <!-- <div class="row h-100 justify-content-center align-items-center">
+        <img
+          class=""
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdB8cFrGiYJTn5Weryj72ZXFaIXgJEgbBfrw&usqp=CAU"
+          alt="lockimg"
+        />
+      </div> -->
+      <h3 class="card-title text-center">Log in</h3>
+      <div class="card-text">
+        <!--
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+        <form [formGroup]="loginForm">
+          <div
+            class="alert alert-danger mt-4 text-center mb-2"
+            *ngIf="submitted"
+            role="alert"
+          >
+            {{ errorMessage }}
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              [class.is-invalid]="
+                (loginForm.get('email').touched || submitted) &&
+                loginForm.get('email').errors?.required
+              "
+              type="text"
+              class="form-control text-lowercase"
+              id="email"
+              name="email"
+              formControlName="email"
+            />
+            <span
+              *ngIf="
+                (loginForm.get('email').touched || submitted) &&
+                loginForm.get('email').errors?.required
+              "
+              id="makeErr"
+              class="error"
+              >Please enter your email address</span
+            >
+          </div>
+          <div class="form-group">
+            <label class="d-flex flex-row align-items-center" for="password"
+              >Password
+            </label>
+            <input
+              [class.is-invalid]="
+                (loginForm.get('password').touched || submitted) &&
+                loginForm.get('password').errors?.required
+              "
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              formControlName="password"
+              value=""
+            />
+            <span
+              *ngIf="
+                (loginForm.get('password').touched || submitted) &&
+                loginForm.get('password').errors?.required
+              "
+              id="makeErr"
+              class="error"
+              >Please enter your password</span
+            >
+          </div>
+          <button class="btn btn-primary btn-block" (click)="loginBtn()">
+            Sign in
+          </button>
+
+          <div class="sign-up">
+            Don't have an account? <a href="#">Create One</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

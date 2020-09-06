@@ -6,6 +6,8 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { AdminSideComponent } from './admin-component/admin-side/admin-side.component';
 import { AdminNavbarComponent } from './admin-component/admin-navbar/admin-navbar.component';
+import { AddUserComponent } from './dialog/add-user/add-user.component';
+import { AddProductComponent } from './dialog/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { AdminNavbarComponent } from './admin-component/admin-navbar/admin-navba
     NavbarComponent,
     AdminSideComponent,
     AdminNavbarComponent,
+    AddUserComponent,
+    AddProductComponent,
   ],
   imports: [CommonModule, RouterModule],
 
