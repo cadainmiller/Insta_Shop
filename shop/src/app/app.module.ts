@@ -4,11 +4,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './component/shared/shared.module';
 import { MainComponent } from './component/components/main/main.component';
+import { ProductComponent } from './component/components/pages/product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
