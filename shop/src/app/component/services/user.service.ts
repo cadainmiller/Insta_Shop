@@ -26,7 +26,7 @@ export class UserService {
     });
   }
 
-  // getProtectedData(): Observable<any> {
-  //   return this.httpClient.get(environment.apiUrl + 'user/');
-  // }
+  getProtectedData(): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'user/');
+  }
 }

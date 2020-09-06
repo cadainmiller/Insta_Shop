@@ -33,7 +33,9 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.navigateByUrl('/dashboard');
+  }
 
   loginBtn() {
     console.log(this.loginForm.value);
@@ -42,9 +44,22 @@ export class LoginComponent implements OnInit {
     this.submitted = false;
     this.userService.loginUser(this.loginForm.value).subscribe(
       (data) => {
+        var user = {
+          name: data.userCredentials.name,
+          email: data.userCredentials.email,
+          phone_number: data.userCredentials.phone_number,
+          role: data.userCredentials.role,
+        };
+
         console.log(data);
         localStorage.setItem('Token', data.token);
-        //this.router.navigateByUrl('/');
+        localStorage.setItem('UserInfo', JSON.stringify(user));
+
+        if (data.userCredentials.role == 'admin') {
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          this.router.navigateByUrl('/');
+        }
       },
       (err: HttpErrorResponse) => {
         this.submitted = true;

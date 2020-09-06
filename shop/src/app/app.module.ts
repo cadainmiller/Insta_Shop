@@ -36,19 +36,11 @@ import { HttpConfigInterceptor } from './component/interceptor/httpconfig.interc
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     SharedModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
-  // providers: [
-  //   HttpClientModule,
-  //   // {
-  //   //   provide: HTTP_INTERCEPTORS,
-  //   //   useClass: HttpConfigInterceptor,
-  //   //   multi: true,
-  //   // },
-  // ],
 
   providers: [
     HttpClientModule,

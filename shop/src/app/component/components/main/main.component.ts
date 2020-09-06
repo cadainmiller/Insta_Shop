@@ -9,18 +9,5 @@ import { UserService } from '../../services/user.service';
 export class MainComponent implements OnInit {
   constructor(private userService: UserService) {}
 
-  getProtectedData() {
-    // this.userService.getProtectedData().subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //   },
-    //   (error: any) => {
-    //     console.log(error);
-    //   }
-    // );
-  }
-
-  ngOnInit(): void {
-    this.getProtectedData();
-  }
+  ngOnInit(): void {}
 }
