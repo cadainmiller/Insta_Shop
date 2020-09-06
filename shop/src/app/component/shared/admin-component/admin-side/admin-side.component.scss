@@ -1,0 +1,26 @@
+:host {
+  .nav {
+    height: 100%;
+  }
+
+  .profile-card {
+    text-align: center;
+    padding: 0px, 20px, 20px, 20px;
+
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  .sidebar-sticky {
+    height: 900px;
+  }
+
+  ion-icon {
+    width: 30px;
+    height: 40px;
+  }
+}
