@@ -10,6 +10,7 @@ import {
   HttpClient,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +41,7 @@ import { HttpConfigInterceptor } from './component/interceptor/httpconfig.interc
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    AgGridModule.withComponents([])
   ],
 
   providers: [

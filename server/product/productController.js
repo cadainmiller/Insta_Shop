@@ -24,3 +24,12 @@ exports.addNewProduct = async (req, res) => {
 }
 
 
+exports.getProduct = async (req, res, next) => {
+    const product = await Product.find({});
+    res.status(200).json({
+        Products: product,
+    });
+    res.json({
+        Products: product
+    });
+  };
