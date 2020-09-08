@@ -31,3 +31,43 @@ exports.getProduct = async (req, res, next) => {
     Products: product,
   });
 };
+
+exports.getProductById = async (req, res, next) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findById(productId);
+    if (!product) return next(new Error("Product does not exist"));
+    res.status(200).json({
+      data: product,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateProductById = async (req, res, next) => {
+  try {
+    const update = req.body;
+    const productId = req.params.productId;
+    await Product.findByIdAndUpdate(productId, update);
+    const product = await User.findById(productId);
+    res.status(200).json({
+      data: product,
+      message: "Product has been updated",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteProduct = async (req, res, next) => {
+  try {
+    const productId = req.params.productId;
+    await User.findByIdAndDelete(productId);
+    res.status(200).json({
+      message: "Product has been deleted",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
