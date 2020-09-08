@@ -1,4 +1,6 @@
 const User = require("../model/userModel");
+const Email = require("../config/email");
+require("dotenv").config();
 
 exports.registerNewUser = async (req, res) => {
   try {
@@ -10,6 +12,18 @@ exports.registerNewUser = async (req, res) => {
     });
     user.password = await user.hashPassword(req.body.password);
     let createdUser = await user.save();
+
+    Email.SendEmail(
+      createdUser.email,
+      "Welocme to Company ",
+      "<p>Hey " +
+        createdUser.name +
+        "</p><p>Welcome to " +
+        process.env.COMPANY_NAME +
+        ".</p><p> You can use the link below to change your password from default </p><p>Username: " +
+        createdUser.email
+    );
+
     res.status(200).json({
       msg: "New user created",
       data: createdUser,
@@ -115,19 +129,15 @@ exports.updateUserById = async (req, res, next) => {
   }
 };
 
-// exports.deleteUser = async (req, res, next) => {
-//   try {
-//     const userId = req.params.userId;
-//     await User.findByIdAndDelete(userId);
-//     res.status(200).json({
-//       data: null,
-//       message: "User has been deleted",
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
-exports.deleteUser = function (req, res) {
-  res.send("delete user");
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    await User.findByIdAndDelete(userId);
+    res.status(200).json({
+      data: null,
+      message: "User has been deleted",
+    });
+  } catch (error) {
+    next(error);
+  }
 };
