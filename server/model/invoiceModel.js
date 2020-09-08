@@ -1,5 +1,6 @@
 
 const mongoose = require("mongoose");
+var ObjectId = require('mongodb').ObjectID;
 var uniqueValidator = require('mongoose-unique-validator');
 const product = require("../model/productModel");
 
@@ -11,9 +12,15 @@ const invoiceSchema = new Schema({
     },
 
     product: [{
-        type: Schema.Types.ObjectId,
-        ref: product
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true
     }],
+
+    quantity: {
+        type: Number,
+        default: 1
+    },
 
     notes: {
         type: String,
