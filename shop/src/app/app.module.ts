@@ -11,6 +11,7 @@ import {
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,8 @@ import { NotfoundComponent } from './component/components/notfound/notfound.comp
 import { HttpConfigInterceptor } from './component/interceptor/httpconfig.interceptor';
 import { AdminProductsComponent } from './component/components/pages/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './component/components/pages/admin-orders/admin-orders.component';
+import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -45,11 +48,14 @@ import { AdminOrdersComponent } from './component/components/pages/admin-orders/
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    ModalModule.forRoot(),
+    BrowserAnimationsModule
   ],
 
   providers: [
     HttpClientModule,
+    DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,

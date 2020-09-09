@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-add-product',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddProductComponent implements OnInit {
 
-  constructor() { }
+  title: string;
+  closeBtnName: string;
+
+  constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
+
   }
 
 }

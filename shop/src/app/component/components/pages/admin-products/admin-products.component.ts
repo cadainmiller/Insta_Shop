@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,TemplateRef  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi, ColumnApi, GridColumnsChangedEvent, ColDef } from 'ag-grid-community';
+import { DatePipe } from '@angular/common';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AddProductComponent } from 'src/app/component/shared/dialog/add-product/add-product.component';
 
 
 @Component({
@@ -27,8 +30,9 @@ export class AdminProductsComponent implements OnInit {
     resizable: true,
     filter: true
   };
+  bsModalRef: BsModalRef;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private datePipe: DatePipe,private modalService: BsModalService) {}
 
 
   ngOnInit() {
@@ -91,7 +95,7 @@ export class AdminProductsComponent implements OnInit {
     };
     const stock: ColDef = {
       headerName: 'Stock',
-      field: 'stock',
+      field: 'quantity',
       filter: 'agTextColumnFilter',
       cellRenderer: (params) => {
         return params.value ? params.value : '&mdash;';
@@ -103,7 +107,48 @@ export class AdminProductsComponent implements OnInit {
       field: 'sale',
       filter: 'agTextColumnFilter',
       cellRenderer: (params) => {
+        const element = `<span class="status bg-${params.value} bg-op-2 text-${params.value}">${params.value}<span/>`;
+        return element;
+      }
+    };
+
+    const price: ColDef = {
+      headerName: 'Cost',
+      field: 'price',
+      filter: 'agTextColumnFilter',
+      cellRenderer: (params) => {
         return params.value ? params.value : '&mdash;';
+      }
+    };
+
+    const sale_price: ColDef = {
+      headerName: 'Sale Price',
+      field: 'sale_price',
+      filter: 'agTextColumnFilter',
+      cellRenderer: (params) => {
+        return params.value ? params.value : '&mdash;';
+      }
+    };
+
+    const createdAt: ColDef = {
+      headerName: 'Created',
+      field: 'createdAt',
+      filter: 'agTextColumnFilter',
+      cellRenderer: (params) => {
+        return params.value
+          ? this.datePipe.transform(params.value, 'MM-dd-yyyy')
+          : '&mdash;';
+      }
+    };
+
+    const updatedAt: ColDef = {
+      headerName: 'Updated',
+      field: 'updatedAt',
+      filter: 'agTextColumnFilter',
+      cellRenderer: (params) => {
+        return params.value
+          ? this.datePipe.transform(params.value, 'MM-dd-yyyy')
+          : '&mdash;';
       }
     };
 
@@ -111,12 +156,26 @@ export class AdminProductsComponent implements OnInit {
       id,
       name,
       description,
+      price,
       stock,
-      sale,     
+      sale,
+      sale_price,
+      createdAt,
+      updatedAt
     ];
   }
 
   rowClicked(data: any) {
     this.selectedAsset = data;
   }
+
+  openModalWithComponent() {
+    const initialState = {
+      title: 'Add New Product'
+    };
+    this.bsModalRef = this.modalService.show(AddProductComponent, {initialState, class: 'modal-lg modal-dialog-centered'});
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
 }
+
+

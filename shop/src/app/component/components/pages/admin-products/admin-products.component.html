@@ -25,7 +25,7 @@
           </div>
         </span> -->
 
-      <button type="button" class="btn btn-primary btn-sm">
+      <button type="button" class="btn btn-primary btn-sm" (click)="openModalWithComponent()">
         Create Product
       </button>
     </div>
@@ -39,7 +39,6 @@
       [defaultColDef]="defaultColDef"
       [rowData]="rowData"
       [columnDefs]="columnDefs"
-      [floatingFilter]="floatingFilter"
       [rowSelection]="rowSelection"
       [enableBrowserTooltips]="enableBrowserTooltips"
       [pagination]="true"
@@ -48,3 +47,5 @@
     ></ag-grid-angular>
   </div>
 </div>
+
+ 

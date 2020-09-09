@@ -1,13 +1,31 @@
 const Product = require("../model/productModel");
+const e = require("express");
 
 exports.addNewProduct = async (req, res) => {
+  const uniqueId = (length=8) => {
+    return parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(length).toString().replace(".", ""))
+  }
+
+  function squared(num) {
+    if (num == "true") {
+      return req.body.sale_price
+    } else {
+      return 0
+    }
+    
+  }
+
   try {
     let product = new Product({
       name: req.body.name,
       description: req.body.description,
-      productId: req.body.productId,
-      stock: req.body.stock,
-      sale: false,
+      product_image: req.body.product_image,
+      productId: "PD"+ uniqueId(),
+      shipping_details: req.body.shipping_details,
+      quantity: req.body.quantity,
+      sale: req.body.sale,
+      sale_price: squared(req.body.sale),
+      price: req.body.price,
     });
     let createProduct = await product.save();
     res.status(200).json({
