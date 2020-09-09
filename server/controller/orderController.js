@@ -30,11 +30,21 @@ exports.createOrder = async (req, res) => {
 };
 
 exports.getOrders = async (req, res, next) => {
-  const orders = await Order.find({});
-  res.status(200).json({
-    Orders: orders,
-  });
-  res.json({
-    Orders: orders,
+  const orders = await Order.find({}).exec((err, orders) => {
+    if (err) {
+      res.status(500).json(err);
+    } else if (!orders) {
+      res.status(404).json();
+    }
+    res.status(200).json({
+      Orders: orders,
+    });
   });
 };
+//   res.status(200).json({
+//     Orders: orders,
+//   });
+//   res.json({
+//     Orders: orders,
+//   });
+// };

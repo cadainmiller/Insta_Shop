@@ -26,11 +26,14 @@ exports.createInvoice = async (req, res) => {
 };
 
 exports.getInvoice = async (req, res, next) => {
-  const invoice = await Invoice.find({});
-  res.status(200).json({
-    Invoices: invoice,
-  });
-  res.json({
-    Invoices: invoice,
+  const invoice = await Invoice.find({}).exec((err, invoice) => {
+    if (err) {
+      res.status(500).json(err);
+    } else if (!invoice) {
+      res.status(404).json();
+    }
+    res.status(200).json({
+      Invoice: invoice,
+    });
   });
 };
