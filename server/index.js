@@ -8,6 +8,7 @@ const app = express();
 const userRoutes = require("./routes/userRoute"); //bring in our user routes
 const productRoutes = require("./routes/productRoute"); //bring in our product routes
 const invoiceRoutes = require("./routes/invoiceRoute"); //bring in our invoice routes
+const orderRoutes = require("./routes/orderRoute"); //bring in our invoice routes
 
 app.use(cors()); // configure cors
 //configure body parser
@@ -31,6 +32,7 @@ app.get("/api", (req, res) => {
 
 app.use("/user", userRoutes);
 app.use("/product", productRoutes);
+app.use("/order", orderRoutes);
 app.use("/invoice", invoiceRoutes);
 
 app.listen(PORT, () => {
