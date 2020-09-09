@@ -41,10 +41,3 @@ exports.getOrders = async (req, res, next) => {
     });
   });
 };
-//   res.status(200).json({
-//     Orders: orders,
-//   });
-//   res.json({
-//     Orders: orders,
-//   });
-// };

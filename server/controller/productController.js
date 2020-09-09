@@ -22,23 +22,37 @@ exports.addNewProduct = async (req, res) => {
   }
 };
 
+// exports.getProduct = async (req, res, next) => {
+//   const product = await Product.find({});
+//   res.status(200).json({
+//     Products: product,
+//   });
+//   res.json({
+//     Products: product,
+//   });
+// };
+
 exports.getProduct = async (req, res, next) => {
-  const product = await Product.find({});
-  res.status(200).json({
-    Products: product,
-  });
-  res.json({
-    Products: product,
+  const product = await Product.find({}).exec((err, product) => {
+    if (err) {
+      res.status(500).json(err);
+    } else if (!product) {
+      res.status(404).json();
+    }
+    res.status(200).json(product);
   });
 };
 
 exports.getProductById = async (req, res, next) => {
   try {
     const productId = req.params.productId;
-    const product = await Product.findById(productId);
-    if (!product) return next(new Error("Product does not exist"));
-    res.status(200).json({
-      data: product,
+    const product = await Product.findById(productId).exec((err, product) => {
+      if (err) {
+        res.status(500).json(err);
+      } else if (!product) {
+        res.status(404).json("Product does not exist");
+      }
+      res.status(200).json(product);
     });
   } catch (error) {
     next(error);
@@ -50,10 +64,16 @@ exports.updateProductById = async (req, res, next) => {
     const update = req.body;
     const productId = req.params.productId;
     await Product.findByIdAndUpdate(productId, update);
-    const product = await User.findById(productId);
-    res.status(200).json({
-      data: product,
-      message: "Product has been updated",
+    const product = await User.findById(productId).exec((err, product) => {
+      if (err) {
+        res.status(500).json(err);
+      } else if (!product) {
+        res.status(404).json();
+      }
+      res.status(200).json({
+        data: product,
+        message: "Product has been updated",
+      });
     });
   } catch (error) {
     next(error);
