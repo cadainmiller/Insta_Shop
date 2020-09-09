@@ -1,0 +1,50 @@
+<div class="grid-position card border-light shadow">
+  <div
+    class="card-header border-bottom-0 bg-white d-flex justify-content-between align-items-center px-2 py-2"
+  >
+    <div class="view-highlight">
+      <ol class="breadcrumb p-0 m-0">
+        <li class="breadcrumb-item text-muted">Showing</li>
+        <li class="breadcrumb-item" aria-current="page">Products</li>
+      </ol>
+    </div>
+    <div class="d-flex align-items-center">
+      <!-- <span class="mr-4">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="assignedSwitch"
+              checked
+              [(ngModel)]="checked"
+              (change)="changed()"
+            />
+            <label class="custom-control-label" for="assignedSwitch">
+              {{ assignedSwitchLabel }}
+            </label>
+          </div>
+        </span> -->
+
+      <button type="button" class="btn btn-primary btn-sm">
+        Create Product
+      </button>
+    </div>
+  </div>
+  <div class="card-body px-2 py-2">
+    <ag-grid-angular
+      #agGrid
+      style="width: 100%; height: 800px"
+      id="myGrid"
+      class="ag-theme-alpine"
+      [defaultColDef]="defaultColDef"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [floatingFilter]="floatingFilter"
+      [rowSelection]="rowSelection"
+      [enableBrowserTooltips]="enableBrowserTooltips"
+      [pagination]="true"
+      (gridReady)="onGridReady($event)"
+      (rowClicked)="rowClicked($event.data)"
+    ></ag-grid-angular>
+  </div>
+</div>

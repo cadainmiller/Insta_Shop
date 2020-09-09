@@ -23,6 +23,8 @@ import { LoginComponent } from './component/components/login/login.component';
 import { LoginUpdateComponent } from './component/components/login-update/login-update.component';
 import { NotfoundComponent } from './component/components/notfound/notfound.component';
 import { HttpConfigInterceptor } from './component/interceptor/httpconfig.interceptor';
+import { AdminProductsComponent } from './component/components/pages/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './component/components/pages/admin-orders/admin-orders.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { HttpConfigInterceptor } from './component/interceptor/httpconfig.interc
     LoginComponent,
     LoginUpdateComponent,
     NotfoundComponent,
+    AdminProductsComponent,
+    AdminOrdersComponent,
   ],
   imports: [
     BrowserModule,

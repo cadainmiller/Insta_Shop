@@ -13,21 +13,7 @@ export class AdminPanelComponent implements OnInit {
   rowData: any = [];
 
   ngOnInit() {
-    this.http.get('http://localhost:4000/product/').subscribe((resp) => {
-      this.rowData = resp;
-      console.log(resp);
-    });
+    
   }
 
-  columnDefs = [
-    { headerName: 'ID', field: 'productId', sortable: true, filter: true },
-    { headerName: 'Name', field: 'name', sortable: true, filter: true },
-    {
-      headerName: 'Description',
-      field: 'description',
-      sortable: true,
-      filter: true,
-    },
-    { headerName: 'Stock', field: 'stock', sortable: true, filter: true },
-  ];
 }

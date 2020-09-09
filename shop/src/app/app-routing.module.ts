@@ -9,6 +9,8 @@ import { LoginComponent } from './component/components/login/login.component';
 import { LoginUpdateComponent } from './component/components/login-update/login-update.component';
 import { NotfoundComponent } from './component/components/notfound/notfound.component';
 import { AuthGuard } from './component/guard/auth.guard';
+import { AdminProductsComponent } from './component/components/pages/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './component/components/pages/admin-orders/admin-orders.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,14 @@ const routes: Routes = [
       {
         path: '',
         component: AdminPanelComponent,
+      },
+      {
+        path: 'product',
+        component: AdminProductsComponent,
+      },
+      {
+        path: 'order',
+        component: AdminOrdersComponent,
       },
     ],
   },
