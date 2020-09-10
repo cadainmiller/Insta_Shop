@@ -11,7 +11,8 @@ import {
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';    
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';  
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,6 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    TypeaheadModule.forRoot(),
     AgGridModule.withComponents([]),
     ModalModule.forRoot(),
     BrowserAnimationsModule
