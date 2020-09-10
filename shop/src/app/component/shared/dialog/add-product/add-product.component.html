@@ -10,31 +10,115 @@
   </button>
 </div>
 <div class="modal-body">
-    <form>
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault01">First name</label>
-            <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
+  <form>
+    <h6 class="card-subtitle mr-3 mb-3">Product Information.</h6>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="productId">Product ID</label>
+        <input
+          disabled
+          type="text"
+          class="form-control"
+          id="productId"
+          placeholder="{{ orderId }}"
+          value="{{ orderId }}"
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="productId">Name</label>
+        <input type="text" class="form-control" id="productId" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="productId">Image</label>
+        <input type="text" class="form-control" id="productId" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-12 mb-3">
+        <label for="description">Product Description</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="description"
+          placeholder="{{ orderId }}"
+          rows="3"
+        >
+        </textarea>
+      </div>
+    </div>
+
+    <hr />
+    <h6 class="card-subtitle mr-3 mb-3">Pricing Information.</h6>
+
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="productId">Product Price</label>
+        <input type="text" class="form-control" id="productId" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="productId">Product Sale Price</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="basic-addon1">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1"></label>
+                </div>
+            </div>
           </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault02">Last name</label>
-            <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
-          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
         </div>
-        <div class="form-group">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-            <label class="form-check-label" for="invalidCheck2">
-              Agree to terms and conditions
-            </label>
-          </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Submit form</button>
-      </form>
-      
+      </div>
+    </div>
+    <hr />
+    <h6 class="card-subtitle mr-3 mb-3">Shipping Information.</h6>
+
+    <div class="form-row">
+      <div class="col-md-3 mb-3">
+        <label for="productId"> Weight</label>
+        <input type="text" class="form-control" id="productId" />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="productId"> Depth</label>
+        <input type="text" class="form-control" id="productId" />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="productId"> Width</label>
+        <input type="text" class="form-control" id="productId" />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="productId"> Height</label>
+        <input type="text" class="form-control" id="productId" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="invalidCheck2"
+          required
+        />
+        <label class="form-check-label" for="invalidCheck2">
+          Agree to terms and conditions
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </form>
 </div>
-<div class="modal-footer">
+<!-- <div class="modal-footer">
   <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">
     {{ closeBtnName }}
   </button>
-</div>
+</div> -->
