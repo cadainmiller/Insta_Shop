@@ -1,5 +1,10 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
@@ -19,7 +24,7 @@ import { AddProductComponent } from './dialog/add-product/add-product.component'
     AddUserComponent,
     AddProductComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
 
   exports: [
     HeaderComponent,
@@ -31,6 +36,5 @@ import { AddProductComponent } from './dialog/add-product/add-product.component'
 
   entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-
 })
 export class SharedModule {}

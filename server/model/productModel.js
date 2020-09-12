@@ -13,7 +13,7 @@ const productSchema = new Schema(
       required: true,
     },
     product_image: {
-        type:String,
+      type: String,
     },
     productId: {
       type: String,
@@ -22,34 +22,38 @@ const productSchema = new Schema(
     shipping_details: {
       weight: {
         type: Number,
+        default: 0,
       },
 
       width: {
         type: Number,
+        default: 0,
       },
       height: {
         type: Number,
+        default: 0,
       },
       depth: {
         type: Number,
+        default: 0,
       },
     },
     quantity: {
       type: Number,
-      required: true,
+      default: 0,
     },
     sale: {
       type: String,
-      required: true,
+      default: "false",
     },
     price: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     sale_price: {
-        type: Number,
-        default: 0
-      },
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
