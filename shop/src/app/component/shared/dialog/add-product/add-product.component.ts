@@ -55,10 +55,10 @@ export class AddProductComponent implements OnInit {
   createPrd() {
     console.log(this.ProductForm.value);
 
-    this.productService
-      .creteProduct(this.ProductForm.value)
-      .subscribe((data) => {
-        console.log(data);
-      });
+    // this.productService
+    //   .creteProduct(this.ProductForm.value)
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
   }
 }
