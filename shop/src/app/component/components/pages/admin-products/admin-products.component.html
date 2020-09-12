@@ -1,7 +1,11 @@
-<alert class="success" type="success">
-  <strong>Well done!</strong> You successfully read this important alert
-  message.
-</alert>
+<div *ngFor="let alert of alerts">
+  <alert
+    [type]="alert.type"
+    [dismissOnTimeout]="alert.timeout"
+    (onClosed)="onClosed(alert)"
+    >{{ alert.msg }}</alert
+  >
+</div>
 
 <div class="grid-position card border-light shadow">
   <div

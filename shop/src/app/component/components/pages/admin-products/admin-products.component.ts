@@ -12,6 +12,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AddProductComponent } from 'src/app/component/shared/dialog/add-product/add-product.component';
 import { Product } from 'src/app/component/models/product.model';
+import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 
 @Component({
   selector: 'app-admin-products',
@@ -55,7 +56,7 @@ export class AdminProductsComponent implements OnInit {
   ngOnInit() {
     this.http.get('http://localhost:4000/product/').subscribe((resp) => {
       this.rowData = resp;
-      var result = Object.keys(resp).map(e=>resp[e].productId);
+      var result = Object.keys(resp).map((e) => resp[e].productId);
       this.states = result;
       console.log(resp);
     });
@@ -200,5 +201,17 @@ export class AdminProductsComponent implements OnInit {
       class: 'modal-lg modal-dialog-centered',
     });
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  alerts: any[] = [
+    {
+      type: 'success',
+      msg: `Well done! You successfully read this important alert message. (added: ${new Date().toLocaleTimeString()})`,
+      timeout: 5000,
+    },
+  ];
+
+  onClosed(dismissedAlert: AlertComponent): void {
+    this.alerts = this.alerts.filter((alert) => alert !== dismissedAlert);
   }
 }
