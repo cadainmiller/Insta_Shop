@@ -202,16 +202,4 @@ export class AdminProductsComponent implements OnInit {
     });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
-
-  alerts: any[] = [
-    {
-      type: 'success',
-      msg: `Well done! You successfully read this important alert message. (added: ${new Date().toLocaleTimeString()})`,
-      timeout: 5000,
-    },
-  ];
-
-  onClosed(dismissedAlert: AlertComponent): void {
-    this.alerts = this.alerts.filter((alert) => alert !== dismissedAlert);
-  }
 }
