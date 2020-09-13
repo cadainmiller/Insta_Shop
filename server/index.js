@@ -8,7 +8,8 @@ const app = express();
 const userRoutes = require("./routes/userRoute"); //bring in our user routes
 const productRoutes = require("./routes/productRoute"); //bring in our product routes
 const invoiceRoutes = require("./routes/invoiceRoute"); //bring in our invoice routes
-const orderRoutes = require("./routes/orderRoute"); //bring in our invoice routes
+const orderRoutes = require("./routes/orderRoute"); //bring in our order routes
+const uploadRoutes = require("./routes/uploadRoutes"); //bring in our upload routes
 
 app.use(cors()); // configure cors
 //configure body parser
@@ -38,6 +39,7 @@ app.use("/user", userRoutes);
 app.use("/product", productRoutes);
 app.use("/order", orderRoutes);
 app.use("/invoice", invoiceRoutes);
+app.use("/upload", uploadRoutes);
 
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);
