@@ -6,18 +6,18 @@ const productSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      //required: true,
     },
     description: {
       type: String,
-      required: true,
+      //required: true,
     },
     product_image: {
-      type: String,
+      type: Buffer,
     },
     productId: {
       type: String,
-      required: true,
+      //required: true,
     },
     shipping_details: {
       weight: {

@@ -41,6 +41,7 @@ export class AdminProductsComponent implements OnInit {
   selectedValue: string;
   selectedOption: any;
   stateCtrl = new FormControl();
+  url = '';
 
   constructor(
     private http: HttpClient,
@@ -56,9 +57,13 @@ export class AdminProductsComponent implements OnInit {
   ngOnInit() {
     this.http.get('http://localhost:4000/product/').subscribe((resp) => {
       this.rowData = resp;
-      var result = Object.keys(resp).map((e) => resp[e].productId);
+      const result = Object.keys(resp).map((e) => resp[e].productId);
       this.states = result;
+      const bytes = resp[7].product_image.data;
+
+      this.url = 'data:image/jpeg;base64,' + btoa(bytes);
       console.log(resp);
+      console.log(btoa(bytes));
     });
   }
 

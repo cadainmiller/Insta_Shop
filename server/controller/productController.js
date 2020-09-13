@@ -1,5 +1,17 @@
 const Product = require("../model/productModel");
 const e = require("express");
+const multer = require("multer");
+
+const product_image = multer({
+  limits: {
+    fileSize: 1000000,
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|png|JPG|PNG|JPEG|jpeg)$/))
+      return cb(new Error("This is not a correct format of the file"));
+    cb(undefined, true);
+  },
+});
 
 exports.addNewProduct = async (req, res) => {
   const uniqueId = (length = 8) => {
@@ -10,6 +22,10 @@ exports.addNewProduct = async (req, res) => {
         .replace(".", "")
     );
   };
+
+  let buff = new Buffer(req.file.buffer);
+  let base64data = buff.toString("base64");
+  console.log(base64data);
 
   function squared(num) {
     if (num == "true") {
@@ -23,7 +39,7 @@ exports.addNewProduct = async (req, res) => {
     let product = new Product({
       name: req.body.name,
       description: req.body.description,
-      product_image: req.body.product_image,
+      product_image: base64data,
       productId: "PD" + uniqueId(),
       shipping_details: req.body.shipping_details,
       quantity: req.body.quantity,
