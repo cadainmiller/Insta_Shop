@@ -54,16 +54,28 @@ export class AdminProductsComponent implements OnInit {
 
   states: any;
 
+  hexToBase64(str) {
+    return btoa(
+      String.fromCharCode.apply(
+        null,
+        str
+          .replace(/\r|\n/g, '')
+          .replace(/([\da-fA-F]{2}) ?/g, '0x$1 ')
+          .replace(/ +$/, '')
+          .split(' ')
+      )
+    );
+  }
+
   ngOnInit() {
     this.http.get('http://localhost:4000/product/').subscribe((resp) => {
       this.rowData = resp;
       const result = Object.keys(resp).map((e) => resp[e].productId);
       this.states = result;
-      const bytes = resp[7].product_image.data;
+      const bytes = resp[8].product_image.data;
 
-      this.url = 'data:image/jpeg;base64,' + btoa(bytes);
-      console.log(resp);
-      console.log(btoa(bytes));
+      this.url = 'data:image/jpeg;base64,' + this.hexToBase64(bytes);
+      console.log(this.hexToBase64(bytes));
     });
   }
 

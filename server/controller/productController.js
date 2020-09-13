@@ -23,8 +23,12 @@ exports.addNewProduct = async (req, res) => {
     );
   };
 
-  let buff = new Buffer(req.file.buffer);
-  let base64data = buff.toString("base64");
+  // let buff = new Buffer(req.file.buffer);
+  // let base64data = buff.toString("base64");
+
+  let buff = Buffer.from(req.file.buffer, "base64");
+  let base64data = buff.toString("ascii");
+
   console.log(base64data);
 
   function squared(num) {
