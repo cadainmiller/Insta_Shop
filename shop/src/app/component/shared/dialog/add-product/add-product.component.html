@@ -24,6 +24,12 @@
           formControlName="productid"
         />
       </div>
+      <div class="col-md-6 mb-3">
+        <div class="imagepreview">
+          <img [src]="transform()" />
+          <p>{{ Base64String }}</p>
+        </div>
+      </div>
     </div>
     <div class="form-row">
       <div class="col-md-6 mb-3">
@@ -34,7 +40,7 @@
             ProductForm.get('name').errors?.required
           "
           type="text"
-          class="form-control text-lowercase"
+          class="form-control text"
           id="name"
           name="name"
           formControlName="name"
@@ -46,12 +52,51 @@
           "
           id="makeErr"
           class="error"
-          >Please enter product name</span
+          >Please Enter Name</span
         >
       </div>
+      <div class="col-md-3 mb-3">
+        <label for="quantity">Quantity</label>
+        <input
+          [class.is-invalid]="
+            (ProductForm.get('quantity').touched || submitted) &&
+            ProductForm.get('quantity').errors?.required
+          "
+          type="text"
+          class="form-control"
+          id="quantity"
+          formControlName="quantity"
+        />
+        <span
+          *ngIf="
+            (ProductForm.get('quantity').touched || submitted) &&
+            ProductForm.get('quantity').errors?.required
+          "
+          id="makeErr"
+          class="error"
+          >Please Enter Quantity</span
+        >
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="product_image">Image</label>
+        <input type="file" (change)="handleUpload($event)" />
+        <button
+      </div>
+    </div>
+
+    <div class="form-row">
       <div class="col-md-6 mb-3">
-        <label for="productimage">Image</label>
-        <input type="text" class="form-control" id="productimage" />
+        <label for="product_image">Image</label>
+        <textarea
+          type="text"
+          class="form-control text-uppercase"
+          id="product_image"
+          name="product_image"
+          placeholder="{{ Base64String }}"
+          formControlName="product_image"
+          rows="3"
+        >
+        </textarea>
       </div>
     </div>
 
@@ -78,7 +123,7 @@
           "
           id="makeErr"
           class="error"
-          >Please Enter Product Description</span
+          >Please Enter Description</span
         >
       </div>
     </div>
@@ -88,16 +133,16 @@
 
     <div class="form-row">
       <div class="col-md-6 mb-3">
-        <label for="productprice">Product Price</label>
+        <label for="price">Price</label>
         <input
           type="text"
           class="form-control"
-          id="productprice"
-          formControlName="productprice"
+          id="price"
+          formControlName="price"
         />
       </div>
       <div class="col-md-6 mb-3">
-        <label for="saleprice">Product Sale Price</label>
+        <label for="saleprice">Sale Price</label>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <div class="input-group-text" id="basic-addon1">
@@ -124,43 +169,44 @@
     </div>
     <hr />
     <h6 class="card-subtitle mr-3 mb-3">Shipping Information.</h6>
-
-    <div class="form-row">
-      <div class="col-md-3 mb-3">
-        <label for="productweight"> Weight</label>
-        <input
-          type="text"
-          class="form-control"
-          id="productweight"
-          formControlName="productweight"
-        />
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="productdepth"> Depth</label>
-        <input
-          type="text"
-          class="form-control"
-          id="productdepth"
-          formControlName="productdepth"
-        />
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="productwidth"> Width</label>
-        <input
-          type="text"
-          class="form-control"
-          id="productwidth"
-          formControlName="productwidth"
-        />
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="productheight"> Height</label>
-        <input
-          type="text"
-          class="form-control"
-          id="productheight"
-          formControlName="productheight"
-        />
+    <div formGroupName="shipping_details">
+      <div class="form-row">
+        <div class="col-md-3 mb-3">
+          <label for="weight"> Weight</label>
+          <input
+            type="text"
+            class="form-control"
+            id="weight"
+            formControlName="weight"
+          />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="depth"> Depth</label>
+          <input
+            type="text"
+            class="form-control"
+            id="depth"
+            formControlName="depth"
+          />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="width"> Width</label>
+          <input
+            type="text"
+            class="form-control"
+            id="width"
+            formControlName="width"
+          />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="height"> Height</label>
+          <input
+            type="text"
+            class="form-control"
+            id="height"
+            formControlName="height"
+          />
+        </div>
       </div>
     </div>
   </form>

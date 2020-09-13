@@ -17,6 +17,10 @@ app.use(
     extended: false,
   })
 );
+
+// Make "public" Folder Publicly Available
+app.use("/public", express.static("public"));
+
 app.use(bodyParser.json());
 //configure body-parser ends here
 app.use(morgan("dev")); // configire morgan

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { IdGenerator } from 'src/app/component/analytics/idgenerator';
 import { ProductService } from 'src/app/component/services/product.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -21,23 +21,46 @@ export class AddProductComponent implements OnInit {
   productId = 'PD' + this.idGenerator.uniqueId();
   submitted = false;
   errorMessage = '';
+  base64Image = '';
+  Base64String = '';
 
   constructor(
     public bsModalRef: BsModalRef,
     private idGenerator: IdGenerator,
-    private productService: ProductService
+    private productService: ProductService,
+    private sanitizer: DomSanitizer
   ) {}
+
+  //Call this method in the image source, it will sanitize it.
+  transform() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.base64Image);
+  }
+
+  handleUpload(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      //console.log(reader.result as string);
+      this.base64Image = reader.result as string;
+      this.Base64String = reader.result as string;
+    };
+  }
 
   ProductForm = new FormGroup({
     productid: new FormControl(this.productId),
     name: new FormControl('', Validators.required),
-    description: new FormControl(''),
-    productprice: new FormControl(''),
+    quantity: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    product_image: new FormControl(this.Base64String),
+    price: new FormControl(''),
     saleprice: new FormControl(''),
-    productweight: new FormControl(''),
-    productdepth: new FormControl(''),
-    productwidth: new FormControl(''),
-    productheight: new FormControl(''),
+    shipping_details: new FormGroup({
+      weight: new FormControl(''),
+      depth: new FormControl(''),
+      width: new FormControl(''),
+      height: new FormControl(''),
+    }),
   });
 
   get productid() {
@@ -47,6 +70,20 @@ export class AddProductComponent implements OnInit {
   get name() {
     return this.ProductForm.get('name');
   }
+
+  get description() {
+    return this.ProductForm.get('description');
+  }
+
+  get quantity() {
+    return this.ProductForm.get('quantity');
+  }
+
+  // get product_image() {
+  //   return this.ProductForm.controls['product_image'].setValue(
+  //     this.Base64String
+  //   );
+  // }
 
   ngOnInit(): void {
     // console.log(this.productId);

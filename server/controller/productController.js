@@ -2,17 +2,21 @@ const Product = require("../model/productModel");
 const e = require("express");
 
 exports.addNewProduct = async (req, res) => {
-  const uniqueId = (length=8) => {
-    return parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(length).toString().replace(".", ""))
-  }
+  const uniqueId = (length = 8) => {
+    return parseInt(
+      Math.ceil(Math.random() * Date.now())
+        .toPrecision(length)
+        .toString()
+        .replace(".", "")
+    );
+  };
 
   function squared(num) {
     if (num == "true") {
-      return req.body.sale_price
+      return req.body.sale_price;
     } else {
-      return 0
+      return 0;
     }
-    
   }
 
   try {
@@ -20,7 +24,7 @@ exports.addNewProduct = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       product_image: req.body.product_image,
-      productId: "PD"+ uniqueId(),
+      productId: "PD" + uniqueId(),
       shipping_details: req.body.shipping_details,
       quantity: req.body.quantity,
       sale: req.body.sale,
