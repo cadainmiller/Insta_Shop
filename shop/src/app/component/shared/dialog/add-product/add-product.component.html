@@ -23,18 +23,13 @@
           placeholder="{{ productId }}"
           formControlName="productid"
         />
-        <input
-          type="text"
-          class="form-control text-uppercase"
-          id="product_image"
-          name="product_image"
-          value="{{ base64Image }}"
-          formControlName="product_image"
-        />
       </div>
       <div class="col-md-6 mb-3">
-        <div>
+        <div *ngIf="base64Image != ''" >
           <img class="imagepreview" [src]="base64Image" />
+        </div>
+        <div *ngIf="base64Image === ''">
+          <img class="imagepreview" src="https://www.tibs.org.tw/images/default.jpg" />
         </div>
       </div>
     </div>
