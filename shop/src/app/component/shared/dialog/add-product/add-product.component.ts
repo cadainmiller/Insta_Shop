@@ -22,7 +22,6 @@ export class AddProductComponent implements OnInit {
   submitted = false;
   errorMessage = '';
   base64Image = '';
-  Base64String = '';
 
   constructor(
     public bsModalRef: BsModalRef,
@@ -31,19 +30,13 @@ export class AddProductComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {}
 
-  //Call this method in the image source, it will sanitize it.
-  transform() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.base64Image);
-  }
 
   handleUpload(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      //console.log(reader.result as string);
       this.base64Image = reader.result as string;
-      this.Base64String = reader.result as string;
     };
   }
 
@@ -52,7 +45,7 @@ export class AddProductComponent implements OnInit {
     name: new FormControl('', Validators.required),
     quantity: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    product_image: new FormControl(this.Base64String),
+    product_image: new FormControl(this.base64Image),
     price: new FormControl(''),
     saleprice: new FormControl(''),
     shipping_details: new FormGroup({
@@ -79,11 +72,11 @@ export class AddProductComponent implements OnInit {
     return this.ProductForm.get('quantity');
   }
 
-  // get product_image() {
-  //   return this.ProductForm.controls['product_image'].setValue(
-  //     this.Base64String
-  //   );
-  // }
+  get product_image() {
+    return this.ProductForm.controls['product_image'].setValue(
+      this.base64Image
+    );
+  }
 
   ngOnInit(): void {
     // console.log(this.productId);

@@ -23,11 +23,18 @@
           placeholder="{{ productId }}"
           formControlName="productid"
         />
+        <input
+          type="text"
+          class="form-control text-uppercase"
+          id="product_image"
+          name="product_image"
+          value="{{ base64Image }}"
+          formControlName="product_image"
+        />
       </div>
       <div class="col-md-6 mb-3">
-        <div class="imagepreview">
-          <img [src]="transform()" />
-          <p>{{ Base64String }}</p>
+        <div>
+          <img class="imagepreview" [src]="base64Image" />
         </div>
       </div>
     </div>
@@ -77,27 +84,15 @@
           >Please Enter Quantity</span
         >
       </div>
-      <div class="col-md-3 mb-3">
-        <label for="product_image">Image</label>
-        <input type="file" (change)="handleUpload($event)" />
-        <button
-      </div>
-    </div>
 
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-        <label for="product_image">Image</label>
-        <textarea
-          type="text"
-          class="form-control text-uppercase"
-          id="product_image"
-          name="product_image"
-          placeholder="{{ Base64String }}"
-          formControlName="product_image"
-          rows="3"
-        >
-        </textarea>
+      <div class="col-md-3 mb-3">
+        <label for="saleprice">Image</label> <br />
+        <label class="btn btn-primary">
+          Browse <input type="file" (change)="handleUpload($event)" hidden />
+        </label>
       </div>
+
+      <!-- (change)="handleUpload($event)" -->
     </div>
 
     <div class="form-row">

@@ -41,7 +41,7 @@ export class AdminProductsComponent implements OnInit {
   selectedValue: string;
   selectedOption: any;
   stateCtrl = new FormControl();
-  url = '';
+  binary_data = '';
 
   constructor(
     private http: HttpClient,
@@ -54,28 +54,18 @@ export class AdminProductsComponent implements OnInit {
 
   states: any;
 
-  hexToBase64(str) {
-    return btoa(
-      String.fromCharCode.apply(
-        null,
-        str
-          .replace(/\r|\n/g, '')
-          .replace(/([\da-fA-F]{2}) ?/g, '0x$1 ')
-          .replace(/ +$/, '')
-          .split(' ')
-      )
-    );
-  }
+
 
   ngOnInit() {
     this.http.get('http://localhost:4000/product/').subscribe((resp) => {
       this.rowData = resp;
+      console.log(this.rowData)
       const result = Object.keys(resp).map((e) => resp[e].productId);
       this.states = result;
-      const bytes = resp[8].product_image.data;
 
-      this.url = 'data:image/jpeg;base64,' + this.hexToBase64(bytes);
-      console.log(this.hexToBase64(bytes));
+      this.binary_data = resp[17].product_image;
+      //console.log(this.binary_data)
+
     });
   }
 

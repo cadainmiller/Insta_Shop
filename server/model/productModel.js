@@ -13,7 +13,7 @@ const productSchema = new Schema(
       //required: true,
     },
     product_image: {
-      type: Buffer,
+      type: String,
     },
     productId: {
       type: String,
