@@ -9,11 +9,58 @@ const orderSchema = new Schema(
       // required: true,
     },
     products: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        // required: true,
-      },
+        {
+          name: {
+            type: String,
+            //required: true,
+          },
+          description: {
+            type: String,
+            //required: true,
+          },
+          product_image: {
+            type: String,
+          },
+          productId: {
+            type: String,
+            //required: true,
+          },
+          shipping_details: {
+            weight: {
+              type: Number,
+              default: 0,
+            },
+      
+            width: {
+              type: Number,
+              default: 0,
+            },
+            height: {
+              type: Number,
+              default: 0,
+            },
+            depth: {
+              type: Number,
+              default: 0,
+            },
+          },
+          quantity: {
+            type: Number,
+            default: 0,
+          },
+          sale: {
+            type: String,
+            default: "false",
+          },
+          price: {
+            type: Number,
+            default: 0,
+          },
+          sale_price: {
+            type: Number,
+            default: 0,
+          },
+        }
     ],
     quantity: {
       type: Number,

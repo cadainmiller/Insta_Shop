@@ -11,10 +11,8 @@ exports.createOrder = async (req, res) => {
     );
   };
 
- 
-
   const gctTax = 0.165 * req.body.total;
-  const totalcost = Math.round(gctTax * 100) / 100 + req.body.total
+  const totalcost = Math.round(gctTax * 100) / 100 + req.body.total;
 
   try {
     let order = new Order({
@@ -40,20 +38,29 @@ exports.createOrder = async (req, res) => {
   }
 };
 
-
 exports.getOrders = async (req, res, next) => {
-  
-  const orders = await Order.find({}).populate('Product').exec((err, orders) => {
+  const orders = await Order.find({}).exec((err, orders) => {
     if (err) {
       res.status(500).json(err);
     } else if (!orders) {
       res.status(404).json();
     }
+
     res.status(200).json({
       Orders: orders,
     });
-  }); 
+  });
+
 };
+
+// Story.
+// findOne({ title: 'Casino Royale' }).
+// populate('author').
+// exec(function (err, story) {
+//   if (err) return handleError(err);
+//   console.log('The author is %s', story.author.name);
+//   // prints "The author is Ian Fleming"
+// });
 
 // const products = await Product.findById(orders.products[0]).exec((err, product) =>{
 //   if (err) {
