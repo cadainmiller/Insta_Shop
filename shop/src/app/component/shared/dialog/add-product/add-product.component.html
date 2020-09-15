@@ -78,7 +78,7 @@
         <div class="col-md-3 mb-3">
           <label for="saleprice">Image</label> <br />
           <label class="btn btn-primary">
-            Browse
+            Upload
             <input type="file" (change)="handleUpload($event)" hidden />
           </label>
         </div>
@@ -132,16 +132,14 @@
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <div class="input-group-text" id="basic-addon1">
-                <div class="custom-control custom-switch">
+                <div class="form-check form-check-inline">
                   <input
                     type="checkbox"
-                    class="custom-control-input"
-                    id="customSwitch1"
+                    class="form-check-input"
+                    id="onsale"
+                    formControlName="onsale"
                   />
-                  <label
-                    class="custom-control-label"
-                    for="customSwitch1"
-                  ></label>
+                  <label class="form-check-label" for="onsale">Sale</label>
                 </div>
               </div>
             </div>
@@ -298,7 +296,7 @@
         <div class="col-md-3 mb-3">
           <label for="saleprice">Image</label> <br />
           <label class="btn btn-primary">
-            Browse
+            Upload
             <input type="file" (change)="handleUpload($event)" hidden />
           </label>
         </div>
@@ -352,14 +350,14 @@
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <div class="input-group-text" id="basic-addon1">
-                <div class="custom-control custom-switch">
+                <div class="form-check form-check-inline">
                   <input
                     type="checkbox"
-                    class="custom-control-input"
+                    class="form-check-input"
                     id="onsale"
                     formControlName="onsale"
                   />
-                  <label class="custom-control-label" for="onsale">Sale</label>
+                  <label class="form-check-label" for="onsale">Sale</label>
                 </div>
               </div>
             </div>

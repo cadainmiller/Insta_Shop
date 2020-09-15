@@ -8,11 +8,13 @@ import {
   ColDef,
 } from 'ag-grid-community';
 import { DatePipe } from '@angular/common';
+import { ProductService } from 'src/app/component/services/product.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddProductComponent } from 'src/app/component/shared/dialog/add-product/add-product.component';
 import { Product } from 'src/app/component/models/product.model';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
+
 
 @Component({
   selector: 'app-admin-products',
@@ -46,7 +48,8 @@ export class AdminProductsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private productService: ProductService
   ) {}
 
   ProductIDForm = new FormGroup({
@@ -59,7 +62,9 @@ export class AdminProductsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.http.get('http://localhost:4000/product/').subscribe((resp) => {
+
+    this.productService.getAllProduct()
+    .subscribe((resp) => {
       this.rowData = resp;
       console.log(this.rowData)
       const result = Object.keys(resp).map((e) => resp[e].productId);

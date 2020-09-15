@@ -106,9 +106,7 @@ export class AddProductComponent implements OnInit {
 
     if (this.action == 'update') {
     
-
-      this.http
-        .get('http://localhost:4000/product/productID/' + this.query)
+      this.productService.getProductBy(this.query)
         .subscribe((data) => {
           this.receivedInfo = data;
           this._id = this.receivedInfo._id;

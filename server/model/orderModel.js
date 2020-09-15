@@ -6,30 +6,37 @@ const orderSchema = new Schema(
   {
     OrderId: {
       type: String,
-      required: true,
+      // required: true,
     },
     products: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product",
-        required: true,
+        // required: true,
       },
     ],
+    quantity: {
+      type: Number,
+    },
     total: {
       type: Number,
-      required: true,
+      // required: true,
     },
     tax: {
       type: Number,
-      required: true,
+      // required: true,
+    },
+    final_cost: {
+      type: Number,
+      // required: true,
     },
     shipping: {
-      type: Number,
-      required: true,
+      type: String,
+      // required: true,
     },
     notes: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   {

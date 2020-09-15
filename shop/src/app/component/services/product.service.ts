@@ -18,9 +18,23 @@ export class ProductService {
     });
   }
 
+  getAllProduct(): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    return this.httpClient.get(environment.apiUrl + 'product/',{
+      headers: headers,
+    });
+  }
+
   getProductById(id): Observable<any> {
     const headers = { 'content-type': 'application/json' };
     return this.httpClient.get(environment.apiUrl + 'product/' + id,{
+      headers: headers,
+    });
+  }
+
+  getProductBy(id): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    return this.httpClient.get(environment.apiUrl + 'product/productID/' + id,{
       headers: headers,
     });
   }
@@ -32,4 +46,6 @@ export class ProductService {
       headers: headers,
     });
   }
+
+  
 } 
