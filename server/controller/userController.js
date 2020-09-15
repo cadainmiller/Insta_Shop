@@ -6,6 +6,7 @@ exports.registerNewUser = async (req, res) => {
   try {
     let user = new User({
       name: req.body.name,
+      user_image: req.body.user_image,
       phone_number: req.body.phone_number,
       email: req.body.email,
       role: req.body.role,
@@ -54,14 +55,27 @@ exports.loginUser = async (req, res) => {
     }
     let match = await user.compareUserPassword(login.password, user.password);
     if (match) {
+
+      const payload = { 
+        _id: user._id,
+        name: user.name,
+        phone_number: user.phone_number,
+        email: user.email,
+        role: user.role,
+        password: user.password,
+        createdAt: user.createdAt,    
+        updatedAt: user.updatedAt,    
+        __v: user.__v,         
+      };
+
       let token = await user.generateJwtToken(
         {
-          user,
+          payload
         },
         "secret",
         {
           expiresIn: 604800,
-        }
+        },
       );
       if (token) {
         res.status(200).json({

@@ -9,7 +9,7 @@ import {
 } from 'ag-grid-community';
 import { DatePipe } from '@angular/common';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddProductComponent } from 'src/app/component/shared/dialog/add-product/add-product.component';
 import { Product } from 'src/app/component/models/product.model';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
@@ -40,20 +40,22 @@ export class AdminProductsComponent implements OnInit {
   bsModalRef: BsModalRef;
   selectedValue: string;
   selectedOption: any;
-  stateCtrl = new FormControl();
-  binary_data = '';
+  url = '';
+  productIDs: any;
 
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
     private modalService: BsModalService
   ) {}
-  myForm = new FormGroup({
-    state: this.stateCtrl,
+
+  ProductIDForm = new FormGroup({
+    productId: new FormControl('',Validators.required)
   });
 
-  states: any;
-
+  get productId() {
+    return this.ProductIDForm.get('productId');
+  }
 
 
   ngOnInit() {
@@ -61,10 +63,10 @@ export class AdminProductsComponent implements OnInit {
       this.rowData = resp;
       console.log(this.rowData)
       const result = Object.keys(resp).map((e) => resp[e].productId);
-      this.states = result;
+      this.productIDs = result;
 
-      //this.binary_data = resp[7].product_image;
-      //console.log(this.binary_data)
+      // this.url = resp[19].product_image;
+      // console.log(this.url)
 
     });
   }
@@ -143,7 +145,7 @@ export class AdminProductsComponent implements OnInit {
     };
 
     const price: ColDef = {
-      headerName: 'Cost',
+      headerName: 'Price',
       field: 'price',
       filter: 'agTextColumnFilter',
       cellRenderer: (params) => {
@@ -186,8 +188,8 @@ export class AdminProductsComponent implements OnInit {
       id,
       name,
       description,
-      price,
       stock,
+      price,
       sale,
       sale_price,
       createdAt,
@@ -201,12 +203,28 @@ export class AdminProductsComponent implements OnInit {
 
   openModalWithComponent() {
     const initialState = {
-      title: 'Add New Product',
+      title: 'Create Product',
+      action: 'add'
     };
     this.bsModalRef = this.modalService.show(AddProductComponent, {
       initialState,
       class: 'modal-lg modal-dialog-centered',
     });
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+
+  openUpdateModalWithComponent() {
+    console.log(this.ProductIDForm.value);
+    const initialState = {
+      title: 'Update Product',
+      action: 'update',
+      query: this.ProductIDForm.value.productId,
+    };
+    this.bsModalRef = this.modalService.show(AddProductComponent, {
+      initialState,
+      class: 'modal-lg modal-dialog-centered',
+    });
+    this.bsModalRef.content.closeBtnName = 'Cancel';
   }
 }

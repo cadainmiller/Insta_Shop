@@ -9,6 +9,9 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    user_image: {
+        type: String,
+    },
     password: {
         type: String,
         required: true

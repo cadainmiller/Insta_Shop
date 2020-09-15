@@ -30,7 +30,6 @@ import { AdminProductsComponent } from './component/components/pages/admin-produ
 import { AdminOrdersComponent } from './component/components/pages/admin-orders/admin-orders.component';
 import { DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 @NgModule({
   declarations: [
     AppComponent,

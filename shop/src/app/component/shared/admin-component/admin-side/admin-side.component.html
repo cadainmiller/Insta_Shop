@@ -1,9 +1,14 @@
 <div class="sidebar-sticky">
   <div class="profile-card pb-4 pt-4">
-    <img
-      src="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"
-      alt=""
-    />
+    <div *ngIf="url != ''">
+      <img [src]="url" alt="Image Source" />
+    </div>
+    <div *ngIf="url === ''">
+      <img
+        src="https://www.tibs.org.tw/images/default.jpg"
+        alt="Default Source"
+      />
+    </div>
     <div class="header text-white">
       <h2>{{ name }}</h2>
       <h4>{{ email }}</h4>
@@ -23,16 +28,15 @@
       routerLinkActive=""
       class="list-group-item list-group-item-action d-flex align-items-center text-white bg-dark mr-0"
     >
-    <ion-icon class='mr-2' name="server"></ion-icon>Products
+      <ion-icon class="mr-2" name="server"></ion-icon>Products
     </a>
 
     <a
-    routerLink="/dashboard/order"
-    routerLinkActive=""
-    class="list-group-item list-group-item-action d-flex align-items-center text-white bg-dark mr-0"
-  >
-  <ion-icon class='mr-2' name="boat"></ion-icon>Orders
-  </a>
-    
+      routerLink="/dashboard/order"
+      routerLinkActive=""
+      class="list-group-item list-group-item-action d-flex align-items-center text-white bg-dark mr-0"
+    >
+      <ion-icon class="mr-2" name="boat"></ion-icon>Orders
+    </a>
   </div>
 </div>

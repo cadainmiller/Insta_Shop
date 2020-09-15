@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
         var user = {
           name: data.userCredentials.name,
           email: data.userCredentials.email,
+          user_image: data.userCredentials.user_image,
           phone_number: data.userCredentials.phone_number,
           role: data.userCredentials.role,
         };

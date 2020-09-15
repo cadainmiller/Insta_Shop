@@ -31,13 +31,13 @@
     </ul>
     <div class="my-2 my-lg-0 pr-4"></div>
     <a data-toggle="tooltip" data-placement="left" title="View Profile">
-      <ion-icon name="person-circle"></ion-icon
+      <ion-icon name="person-circle" (click)="openProfileModal()"></ion-icon
     ></a>
     <a data-toggle="tooltip" data-placement="left" title="View Settings"
-      ><ion-icon name="settings"></ion-icon
+      ><ion-icon name="settings" (click)="openSettingModal()"></ion-icon
     ></a>
     <a data-toggle="tooltip" data-placement="left" title="Logout"
-      ><ion-icon name="log-out"></ion-icon
+      ><ion-icon name="log-out" (click)="logout()"></ion-icon
     ></a>
   </div>
 </nav>

@@ -101,12 +101,28 @@ exports.getProductById = async (req, res, next) => {
   }
 };
 
+exports.getProductByPD = async (req, res, next) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findOne({"productId": productId}).exec((err, product) => {
+      if (err) {
+        res.status(500).json(err);
+      } else if (!product) {
+        res.status(404).json("Product does not exist");
+      }
+      res.status(200).json(product);
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.updateProductById = async (req, res, next) => {
   try {
     const update = req.body;
     const productId = req.params.productId;
     await Product.findByIdAndUpdate(productId, update);
-    const product = await User.findById(productId).exec((err, product) => {
+    const product = await Product.findById(productId).exec((err, product) => {
       if (err) {
         res.status(500).json(err);
       } else if (!product) {
@@ -125,7 +141,7 @@ exports.updateProductById = async (req, res, next) => {
 exports.deleteProduct = async (req, res, next) => {
   try {
     const productId = req.params.productId;
-    await User.findByIdAndDelete(productId);
+    await Product.findByIdAndDelete(productId);
     res.status(200).json({
       message: "Product has been deleted",
     });

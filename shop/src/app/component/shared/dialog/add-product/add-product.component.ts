@@ -10,6 +10,7 @@ import {
 import { IdGenerator } from 'src/app/component/analytics/idgenerator';
 import { ProductService } from 'src/app/component/services/product.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -22,12 +23,19 @@ export class AddProductComponent implements OnInit {
   submitted = false;
   errorMessage = '';
   base64Image: string;
+  action: string;
+  url = '';
+  query = '';
+  _id: string;
+
+  receivedInfo: any;
 
   constructor(
     public bsModalRef: BsModalRef,
     private idGenerator: IdGenerator,
     private productService: ProductService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private http: HttpClient
   ) {}
 
   get f() {
@@ -52,16 +60,19 @@ export class AddProductComponent implements OnInit {
         this.ProductForm.patchValue({
           product_image: reader.result,
         });
+        this.url = reader.result as string;
       };
     }
   }
 
   ProductForm = new FormGroup({
+    productId: new FormControl({value: '', disabled: true}),
     name: new FormControl('', Validators.required),
     quantity: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     product_image: new FormControl(null, Validators.required),
     price: new FormControl(''),
+    onsale:new FormControl(false),
     saleprice: new FormControl(''),
     shipping_details: new FormGroup({
       weight: new FormControl(''),
@@ -89,8 +100,37 @@ export class AddProductComponent implements OnInit {
   //   );
   // }
 
+
   ngOnInit(): void {
     // console.log(this.productId);
+
+    if (this.action == 'update') {
+    
+
+      this.http
+        .get('http://localhost:4000/product/productID/' + this.query)
+        .subscribe((data) => {
+          this.receivedInfo = data;
+          this._id = this.receivedInfo._id;
+          console.log( this._id);
+          this.url = this.receivedInfo.product_image
+          this.ProductForm.patchValue({
+            productId: this.receivedInfo.productId,
+            name: this.receivedInfo.name,
+            quantity: this.receivedInfo.quantity,
+            description: this.receivedInfo.description,
+            product_image: this.receivedInfo.product_image,
+            price: this.receivedInfo.price,
+            saleprice: this.receivedInfo.saleprice,
+            shipping_details:{
+              weight: this.receivedInfo.shipping_details.weight,
+              depth: this.receivedInfo.shipping_details.depth,
+              width: this.receivedInfo.shipping_details.width,
+              height: this.receivedInfo.shipping_details.height,
+            },
+          });
+        });
+    }
   }
 
   createPrd() {
@@ -101,5 +141,16 @@ export class AddProductComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       });
+  }
+
+  updatePrd() {
+    console.log(this.ProductForm.value);
+
+    this.productService
+    .updateByProductId(this._id ,this.ProductForm.value)
+    .subscribe((data) => {
+      console.log(data);
+    });
+
   }
 }

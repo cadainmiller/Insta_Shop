@@ -25,10 +25,10 @@
             </label>
           </div>
         </span> -->
-      <form [formGroup]="myForm">
+      <form [formGroup]="ProductIDForm">
         <input
-          formControlName="state"
-          [typeahead]="states"
+        formControlName="productId"
+          [typeahead]="productIDs"
           [typeaheadOptionsLimit]="7"
           [typeaheadMinLength]="0"
           placeholder="ID"
@@ -39,7 +39,8 @@
       <button
         type="button"
         class="btn btn-primary btn-sm ml-2 mr-2"
-        (click)="openModalWithComponent()"
+        [disabled]="!ProductIDForm.valid"
+        (click)="openUpdateModalWithComponent()"
       >
         Find Product
       </button>
@@ -73,5 +74,3 @@
 
 <!-- <img [src]="url" height="50" width="60" alt="Image Source" /> -->
 <!-- <img src="data:image/jpeg;base64,{binary_data}" /> -->
-
-<img src="{{'data:image/jpg;base64,' + binary_data}}" />

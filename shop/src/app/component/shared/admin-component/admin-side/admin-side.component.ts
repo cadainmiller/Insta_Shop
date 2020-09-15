@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AdminSideComponent implements OnInit {
   name = '';
   email = '';
+  url = '';
   constructor() {}
 
   ngOnInit(): void {
@@ -15,5 +16,6 @@ export class AdminSideComponent implements OnInit {
     console.log(user)
     this.name = user.name;
     this.email = user.email;
+    this.url = user.user_image;
   }
 }

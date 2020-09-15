@@ -13,11 +13,8 @@ const uploadRoutes = require("./routes/uploadRoutes"); //bring in our upload rou
 
 app.use(cors()); // configure cors
 //configure body parser
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // Make "public" Folder Publicly Available
 app.use("/public", express.static("public"));

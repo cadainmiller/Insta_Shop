@@ -13,6 +13,8 @@ import { AdminSideComponent } from './admin-component/admin-side/admin-side.comp
 import { AdminNavbarComponent } from './admin-component/admin-navbar/admin-navbar.component';
 import { AddUserComponent } from './dialog/add-user/add-user.component';
 import { AddProductComponent } from './dialog/add-product/add-product.component';
+import { ProfileComponent } from './dialog/profile/profile.component';
+import { SettingsComponent } from './dialog/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { AddProductComponent } from './dialog/add-product/add-product.component'
     AdminNavbarComponent,
     AddUserComponent,
     AddProductComponent,
+    ProfileComponent,
+    SettingsComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
 

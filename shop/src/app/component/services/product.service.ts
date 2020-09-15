@@ -17,4 +17,19 @@ export class ProductService {
       headers: headers,
     });
   }
-}
+
+  getProductById(id): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    return this.httpClient.get(environment.apiUrl + 'product/' + id,{
+      headers: headers,
+    });
+  }
+
+  updateByProductId (id, product: Product): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(product);
+    return this.httpClient.put(environment.apiUrl + 'product/'+ id, body, {
+      headers: headers,
+    });
+  }
+} 
