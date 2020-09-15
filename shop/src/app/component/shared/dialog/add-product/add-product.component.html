@@ -14,22 +14,16 @@
     <h6 class="card-subtitle mr-3 mb-3">Product Information.</h6>
     <div class="form-row">
       <div class="col-md-6 mb-3">
-        <label for="productid">Product ID</label>
-        <input
-          type="text"
-          class="form-control text-uppercase"
-          id="productid"
-          name="productid"
-          placeholder="{{ productId }}"
-          formControlName="productid"
-        />
       </div>
       <div class="col-md-6 mb-3">
-        <div *ngIf="base64Image != ''" >
+        <div *ngIf="base64Image != ''">
           <img class="imagepreview" [src]="base64Image" />
         </div>
         <div *ngIf="base64Image === ''">
-          <img class="imagepreview" src="https://www.tibs.org.tw/images/default.jpg" />
+          <img
+            class="imagepreview"
+            src="https://www.tibs.org.tw/images/default.jpg"
+          />
         </div>
       </div>
     </div>
@@ -83,7 +77,12 @@
       <div class="col-md-3 mb-3">
         <label for="saleprice">Image</label> <br />
         <label class="btn btn-primary">
-          Browse <input type="file" (change)="handleUpload($event)" hidden />
+          Browse
+          <input
+            type="file"
+            (change)="handleUpload($event)"
+            hidden
+          />
         </label>
       </div>
 

@@ -63,7 +63,7 @@ export class AdminProductsComponent implements OnInit {
       const result = Object.keys(resp).map((e) => resp[e].productId);
       this.states = result;
 
-      this.binary_data = resp[17].product_image;
+      //this.binary_data = resp[7].product_image;
       //console.log(this.binary_data)
 
     });

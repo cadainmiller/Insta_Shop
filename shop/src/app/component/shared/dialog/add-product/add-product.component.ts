@@ -21,7 +21,7 @@ export class AddProductComponent implements OnInit {
   productId = 'PD' + this.idGenerator.uniqueId();
   submitted = false;
   errorMessage = '';
-  base64Image = '';
+  base64Image: string;
 
   constructor(
     public bsModalRef: BsModalRef,
@@ -30,22 +30,37 @@ export class AddProductComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {}
 
+  get f() {
+    return this.ProductForm.controls;
+  }
 
   handleUpload(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.base64Image = reader.result as string;
-    };
+    // const file = event.target.files[0];
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   this.base64Image = reader.result as string;
+    // };
+
+    let reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.ProductForm.patchValue({
+          product_image: reader.result,
+        });
+      };
+    }
   }
 
   ProductForm = new FormGroup({
-    productid: new FormControl(this.productId),
     name: new FormControl('', Validators.required),
     quantity: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    product_image: new FormControl(''),
+    product_image: new FormControl(null, Validators.required),
     price: new FormControl(''),
     saleprice: new FormControl(''),
     shipping_details: new FormGroup({
@@ -55,10 +70,6 @@ export class AddProductComponent implements OnInit {
       height: new FormControl(''),
     }),
   });
-
-  get productid() {
-    return this.ProductForm.controls['productId'].setValue(this.productId);
-  }
 
   get name() {
     return this.ProductForm.get('name');
@@ -72,11 +83,11 @@ export class AddProductComponent implements OnInit {
     return this.ProductForm.get('quantity');
   }
 
-  get product_image() {
-    return this.ProductForm.controls['product_image'].setValue(
-      this.base64Image
-    );
-  }
+  // get product_image() {
+  //   return this.ProductForm.controls['product_image'].setValue(
+  //     this.base64Image
+  //   );
+  // }
 
   ngOnInit(): void {
     // console.log(this.productId);
@@ -85,10 +96,10 @@ export class AddProductComponent implements OnInit {
   createPrd() {
     console.log(this.ProductForm.value);
 
-    // this.productService
-    //   .creteProduct(this.ProductForm.value)
-    //   .subscribe((data) => {
-    //     console.log(data);
-    //   });
+    this.productService
+      .creteProduct(this.ProductForm.value)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }

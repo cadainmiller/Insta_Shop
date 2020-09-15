@@ -17,11 +17,11 @@ const product_image = multer({
 
 router.post(
   "/add",
-  auth,
+  
   product_image.single("product_image"),
   productController.addNewProduct
 );
-router.get("/", auth, productController.getProduct);
+router.get("/",  productController.getProduct);
 
 router.get("/:productId", auth, productController.getProductById);
 router.put("/:productId", auth, productController.updateProductById);

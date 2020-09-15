@@ -26,7 +26,7 @@ exports.addNewProduct = async (req, res) => {
   // let buff = new Buffer(req.file.buffer);
   // let base64data = buff.toString("base64");
 
-  let base64data = req.file.buffer.toString("base64");
+  //let base64data = req.file.buffer.toString("base64");
   // let imgUrl = new Buffer(base64data, 'base64');
 
   //console.log(base64data);
@@ -43,7 +43,7 @@ exports.addNewProduct = async (req, res) => {
     let product = new Product({
       name: req.body.name,
       description: req.body.description,
-      product_image: base64data,
+      product_image: req.body.product_image,
       productId: "PD" + uniqueId(),
       shipping_details: req.body.shipping_details,
       quantity: req.body.quantity,
