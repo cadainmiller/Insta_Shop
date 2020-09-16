@@ -79,6 +79,8 @@
   type="button"
   class="btn btn-primary btn-sm ml-2 mr-2"
   (click)="AddToCart()"
->
-  Add To Cart
+> Add <span *ngIf="cart.length > 0" class="badge badge-light">{{cart.length}}</span>
 </button>
+<!-- <p>
+  <ion-icon name="file-tray"></ion-icon>
+</p> -->

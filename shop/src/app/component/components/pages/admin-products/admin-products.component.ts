@@ -44,7 +44,7 @@ export class AdminProductsComponent implements OnInit {
   selectedOption: any;
   url = '';
   productIDs: any;
-  cart=[];
+  cart = [];
 
   constructor(
     private http: HttpClient,
@@ -186,6 +186,15 @@ export class AdminProductsComponent implements OnInit {
       },
     };
 
+    const Action: ColDef = {
+      headerName: 'Action',
+      field: 'productId',
+      filter: 'agTextColumnFilter',
+      cellRenderer: (data) => {
+        const element = `<div class="d-flex"> <button type="button" class="btn btn-outline-primary">Edit</button> </div>` ;
+        return element;
+      },
+    };
     return [
       id,
       name,
@@ -196,6 +205,7 @@ export class AdminProductsComponent implements OnInit {
       sale_price,
       createdAt,
       updatedAt,
+      
     ];
   }
 
@@ -234,12 +244,11 @@ export class AdminProductsComponent implements OnInit {
       .getProductById('5f58f3c6d2d96038c04ac521')
       .subscribe((resp) => {
         if (resp) {
-          this.cart.push({...resp, num:1});
+          this.cart.push({ ...resp, num: 1 });
           console.log(this.cart.length);
           return;
         }
         console.log("Item wasn't added");
-        
       });
   }
 }
