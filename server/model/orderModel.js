@@ -4,63 +4,63 @@ const uniqueValidator = require("mongoose-unique-validator");
 const Schema = mongoose.Schema;
 const orderSchema = new Schema(
   {
-    OrderId: {
+    orderId: {
       type: String,
-      // required: true,
+      required: true,
     },
     products: [
-        {
-          name: {
-            type: String,
-            //required: true,
-          },
-          description: {
-            type: String,
-            //required: true,
-          },
-          product_image: {
-            type: String,
-          },
-          productId: {
-            type: String,
-            //required: true,
-          },
-          shipping_details: {
-            weight: {
-              type: Number,
-              default: 0,
-            },
-      
-            width: {
-              type: Number,
-              default: 0,
-            },
-            height: {
-              type: Number,
-              default: 0,
-            },
-            depth: {
-              type: Number,
-              default: 0,
-            },
-          },
-          quantity: {
+      {
+        name: {
+          type: String,
+          //required: true,
+        },
+        description: {
+          type: String,
+          //required: true,
+        },
+        product_image: {
+          type: String,
+        },
+        productId: {
+          type: String,
+          //required: true,
+        },
+        shipping_details: {
+          weight: {
             type: Number,
             default: 0,
           },
-          sale: {
-            type: String,
-            default: "false",
-          },
-          price: {
+
+          width: {
             type: Number,
             default: 0,
           },
-          sale_price: {
+          height: {
             type: Number,
             default: 0,
           },
-        }
+          depth: {
+            type: Number,
+            default: 0,
+          },
+        },
+        quantity: {
+          type: Number,
+          default: 0,
+        },
+        sale: {
+          type: String,
+          default: "false",
+        },
+        price: {
+          type: Number,
+          default: 0,
+        },
+        sale_price: {
+          type: Number,
+          default: 0,
+        },
+      },
     ],
     quantity: {
       type: Number,

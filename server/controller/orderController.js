@@ -13,10 +13,10 @@ exports.createOrder = async (req, res) => {
 
   const gctTax = 0.165 * req.body.total;
   const totalcost = Math.round(gctTax * 100) / 100 + req.body.total;
-
+  //console.log("ORD" + uniqueId());
   try {
     let order = new Order({
-      orderId: "INV" + uniqueId(),
+      orderId: "ORD" + uniqueId(),
       quantity: req.body.quantity,
       products: req.body.products,
       notes: req.body.notes,
@@ -50,7 +50,6 @@ exports.getOrders = async (req, res, next) => {
       Orders: orders,
     });
   });
-
 };
 
 // Story.
