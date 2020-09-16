@@ -136,19 +136,22 @@
                   <input
                     type="checkbox"
                     class="form-check-input"
-                    id="onsale"
-                    formControlName="onsale"
+                    id="sale"
+                    formControlName="sale"
+                    (change)="checkValue($event)"
                   />
-                  <label class="form-check-label" for="onsale">Sale</label>
+                  <label class="form-check-label" for="sale">Sale</label>
                 </div>
               </div>
             </div>
+            <!-- <div style="color: red; padding-top: 0.2rem" *ngIf="enable">
+              Required
+            </div> -->
             <input
+              *ngIf="enable"
               type="text"
               class="form-control"
               formControlName="saleprice"
-              placeholder="Username"
-              aria-label="Username"
               aria-describedby="basic-addon1"
             />
           </div>
@@ -200,7 +203,13 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary" [disabled]="!ProductForm.valid" (click)="createPrd()">Add Product</button>
+    <button
+      class="btn btn-primary"
+      [disabled]="!ProductForm.valid"
+      (click)="createPrd()"
+    >
+      Add Product
+    </button>
     <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">
       {{ closeBtnName }}
     </button>
@@ -352,19 +361,21 @@
               <div class="input-group-text" id="basic-addon1">
                 <div class="form-check form-check-inline">
                   <input
+                    (change)="checkValue($event)"
                     type="checkbox"
                     class="form-check-input"
-                    id="onsale"
-                    formControlName="onsale"
+                    id="sale"
+                    formControlName="sale"
                   />
-                  <label class="form-check-label" for="onsale">Sale</label>
+                  <label class="form-check-label" for="sale">Sale</label>
                 </div>
               </div>
             </div>
             <input
+              *ngIf="enable"
               type="text"
               class="form-control"
-              formControlName="saleprice"
+              formControlName="sale_price"
               aria-describedby="basic-addon1"
             />
           </div>
@@ -416,7 +427,11 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary" [disabled]="!ProductForm.valid" (click)="updatePrd()">
+    <button
+      class="btn btn-primary"
+      [disabled]="!ProductForm.valid"
+      (click)="updatePrd()"
+    >
       Update Product
     </button>
     <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">

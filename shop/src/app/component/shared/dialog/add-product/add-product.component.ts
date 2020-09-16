@@ -27,6 +27,7 @@ export class AddProductComponent implements OnInit {
   url = '';
   query = '';
   _id: string;
+  enable = false;
 
   receivedInfo: any;
 
@@ -66,14 +67,14 @@ export class AddProductComponent implements OnInit {
   }
 
   ProductForm = new FormGroup({
-    productId: new FormControl({value: '', disabled: true}),
+    productId: new FormControl({ value: '', disabled: true }),
     name: new FormControl('', Validators.required),
     quantity: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     product_image: new FormControl(null, Validators.required),
     price: new FormControl(''),
-    onsale:new FormControl(false),
-    saleprice: new FormControl(''),
+    sale: new FormControl(''),
+    sale_price: new FormControl(''),
     shipping_details: new FormGroup({
       weight: new FormControl(''),
       depth: new FormControl(''),
@@ -100,34 +101,39 @@ export class AddProductComponent implements OnInit {
   //   );
   // }
 
+  checkValue(event: any) {
+    this.ProductForm.patchValue({
+      sale: event.target.checked,
+    });
+    this.enable = event.target.checked;
+  }
 
   ngOnInit(): void {
     // console.log(this.productId);
 
     if (this.action == 'update') {
-    
-      this.productService.getProductBy(this.query)
-        .subscribe((data) => {
-          this.receivedInfo = data;
-          this._id = this.receivedInfo._id;
-          console.log( this._id);
-          this.url = this.receivedInfo.product_image
-          this.ProductForm.patchValue({
-            productId: this.receivedInfo.productId,
-            name: this.receivedInfo.name,
-            quantity: this.receivedInfo.quantity,
-            description: this.receivedInfo.description,
-            product_image: this.receivedInfo.product_image,
-            price: this.receivedInfo.price,
-            saleprice: this.receivedInfo.saleprice,
-            shipping_details:{
-              weight: this.receivedInfo.shipping_details.weight,
-              depth: this.receivedInfo.shipping_details.depth,
-              width: this.receivedInfo.shipping_details.width,
-              height: this.receivedInfo.shipping_details.height,
-            },
-          });
+      this.productService.getProductBy(this.query).subscribe((data) => {
+        this.receivedInfo = data;
+        this._id = this.receivedInfo._id;
+        console.log(this._id);
+        this.url = this.receivedInfo.product_image;
+        this.ProductForm.patchValue({
+          productId: this.receivedInfo.productId,
+          name: this.receivedInfo.name,
+          quantity: this.receivedInfo.quantity,
+          description: this.receivedInfo.description,
+          product_image: this.receivedInfo.product_image,
+          price: this.receivedInfo.price,
+          sale: this.receivedInfo.sale,
+          sale_price: this.receivedInfo.sale_price,
+          shipping_details: {
+            weight: this.receivedInfo.shipping_details.weight,
+            depth: this.receivedInfo.shipping_details.depth,
+            width: this.receivedInfo.shipping_details.width,
+            height: this.receivedInfo.shipping_details.height,
+          },
         });
+      });
     }
   }
 
@@ -145,10 +151,9 @@ export class AddProductComponent implements OnInit {
     console.log(this.ProductForm.value);
 
     this.productService
-    .updateByProductId(this._id ,this.ProductForm.value)
-    .subscribe((data) => {
-      console.log(data);
-    });
-
+      .updateByProductId(this._id, this.ProductForm.value)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }

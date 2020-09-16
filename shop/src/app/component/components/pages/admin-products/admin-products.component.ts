@@ -15,7 +15,6 @@ import { AddProductComponent } from 'src/app/component/shared/dialog/add-product
 import { Product } from 'src/app/component/models/product.model';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 
-
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
@@ -53,26 +52,22 @@ export class AdminProductsComponent implements OnInit {
   ) {}
 
   ProductIDForm = new FormGroup({
-    productId: new FormControl('',Validators.required)
+    productId: new FormControl('', Validators.required),
   });
 
   get productId() {
     return this.ProductIDForm.get('productId');
   }
 
-
   ngOnInit() {
-
-    this.productService.getAllProduct()
-    .subscribe((resp) => {
+    this.productService.getAllProduct().subscribe((resp) => {
       this.rowData = resp;
-      console.log(this.rowData)
+      console.log(this.rowData);
       const result = Object.keys(resp).map((e) => resp[e].productId);
       this.productIDs = result;
 
       // this.url = resp[19].product_image;
       // console.log(this.url)
-
     });
   }
 
@@ -141,7 +136,7 @@ export class AdminProductsComponent implements OnInit {
       field: 'sale',
       filter: 'agTextColumnFilter',
       cellRenderer: (params) => {
-        if (params.value == 'true') {
+        if (params.value) {
           const element = `<span class="status bg-${params.value} bg-op-2 text-${params.value}">${params.value}<span/>`;
           return `<span class="status bg-red bg-op-2 text-green">On Sale<span/>`;
         }
@@ -209,7 +204,7 @@ export class AdminProductsComponent implements OnInit {
   openModalWithComponent() {
     const initialState = {
       title: 'Create Product',
-      action: 'add'
+      action: 'add',
     };
     this.bsModalRef = this.modalService.show(AddProductComponent, {
       initialState,
@@ -217,7 +212,6 @@ export class AdminProductsComponent implements OnInit {
     });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
-
 
   openUpdateModalWithComponent() {
     console.log(this.ProductIDForm.value);

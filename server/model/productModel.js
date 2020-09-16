@@ -43,8 +43,8 @@ const productSchema = new Schema(
       default: 0,
     },
     sale: {
-      type: String,
-      default: "false",
+      type: Boolean,
+      //default: false,
     },
     price: {
       type: Number,
