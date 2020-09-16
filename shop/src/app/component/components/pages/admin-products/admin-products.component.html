@@ -27,7 +27,7 @@
         </span> -->
       <form [formGroup]="ProductIDForm">
         <input
-        formControlName="productId"
+          formControlName="productId"
           [typeahead]="productIDs"
           [typeaheadOptionsLimit]="7"
           [typeaheadMinLength]="0"
@@ -74,3 +74,11 @@
 
 <!-- <img [src]="url" height="50" width="60" alt="Image Source" /> -->
 <!-- <img src="data:image/jpeg;base64,{binary_data}" /> -->
+
+<button
+  type="button"
+  class="btn btn-primary btn-sm ml-2 mr-2"
+  (click)="AddToCart()"
+>
+  Add To Cart
+</button>

@@ -14,6 +14,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddProductComponent } from 'src/app/component/shared/dialog/add-product/add-product.component';
 import { Product } from 'src/app/component/models/product.model';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-admin-products',
@@ -43,6 +44,7 @@ export class AdminProductsComponent implements OnInit {
   selectedOption: any;
   url = '';
   productIDs: any;
+  cart = Array;
 
   constructor(
     private http: HttpClient,
@@ -225,5 +227,20 @@ export class AdminProductsComponent implements OnInit {
       class: 'modal-lg modal-dialog-centered',
     });
     this.bsModalRef.content.closeBtnName = 'Cancel';
+  }
+
+  AddToCart() {
+    this.productService
+      .getProductById('5f54e7ded2ce0525d84cf497')
+      .subscribe((resp) => {
+        //console.log(resp);
+        //const item = resp;
+        //this.cart = resp;
+        //this.cart.push(item);
+        //console.log(this.cart);
+        //this.cart = object;
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        localStorage.setItem('Cart', JSON.stringify(cart));
+      });
   }
 }
