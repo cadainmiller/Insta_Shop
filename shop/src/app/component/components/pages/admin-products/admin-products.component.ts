@@ -44,7 +44,7 @@ export class AdminProductsComponent implements OnInit {
   selectedOption: any;
   url = '';
   productIDs: any;
-  cart = Array;
+  cart=[];
 
   constructor(
     private http: HttpClient,
@@ -231,16 +231,15 @@ export class AdminProductsComponent implements OnInit {
 
   AddToCart() {
     this.productService
-      .getProductById('5f54e7ded2ce0525d84cf497')
+      .getProductById('5f58f3c6d2d96038c04ac521')
       .subscribe((resp) => {
-        //console.log(resp);
-        //const item = resp;
-        //this.cart = resp;
-        //this.cart.push(item);
-        //console.log(this.cart);
-        //this.cart = object;
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        localStorage.setItem('Cart', JSON.stringify(cart));
+        if (resp) {
+          this.cart.push({...resp, num:1});
+          console.log(this.cart.length);
+          return;
+        }
+        console.log("Item wasn't added");
+        
       });
   }
 }
