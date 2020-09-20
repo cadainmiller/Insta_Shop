@@ -1,8 +1,10 @@
 import { Address } from './address.model';
+import { CustomerInfo } from './customerInfo.model';
 import { Product } from './product.model';
 
 export class Oder {
   orderId = '';
+  customer_info = CustomerInfo;
   products = [Product];
   notes: string | any;
   total = 0;

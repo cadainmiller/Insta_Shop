@@ -8,6 +8,26 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
+    customer_info: {
+      first_name: {
+        type: String,
+        //required: true,
+      },
+      last_name: {
+        type: String,
+        //required: true,
+      },
+      email: {
+        type: String,
+        //required: true,
+      },
+      phone_number: [
+        {
+          type: Number,
+          //required: true,
+        },
+      ],
+    },
     products: [
       {
         name: {
@@ -101,6 +121,12 @@ const orderSchema = new Schema(
       zip: {
         type: String,
       },
+    },
+    order_invoice: {
+      type: String,
+    },
+    order_receipt: {
+      type: String,
     },
   },
   {

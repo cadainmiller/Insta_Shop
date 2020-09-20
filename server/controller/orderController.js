@@ -17,6 +17,7 @@ exports.createOrder = async (req, res) => {
   try {
     let order = new Order({
       orderId: "INV" + uniqueId(),
+      customer_info: req.body.customer_info,
       quantity: req.body.quantity,
       products: req.body.products,
       notes: req.body.notes,

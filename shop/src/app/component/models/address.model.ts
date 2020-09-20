@@ -1,7 +1,7 @@
 export class Address {
-  street = '';
-  street2 = '';
-  city = '';
-  parish = '';
+  first_name = '';
+  last_name = '';
+  email = '';
+  phone_number: Array<Number>;
   zip = '';
 }
