@@ -24,6 +24,7 @@ exports.createOrder = async (req, res) => {
       tax: Math.round(gctTax * 100) / 100,
       final_cost: totalcost,
       shipping: req.body.shipping,
+      shipping_address: req.body.shipping_address,
     });
     let createOrder = await order.save();
     res.status(200).json({

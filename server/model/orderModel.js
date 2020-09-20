@@ -85,6 +85,23 @@ const orderSchema = new Schema(
       type: String,
       // required: true,
     },
+    shipping_address: {
+      street: {
+        type: String,
+      },
+      street2: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      parish: {
+        type: String,
+      },
+      zip: {
+        type: String,
+      },
+    },
   },
   {
     timestamps: true,
