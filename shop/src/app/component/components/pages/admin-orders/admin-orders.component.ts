@@ -23,7 +23,7 @@ export class AdminOrdersComponent implements OnInit {
     }
 
     this.config = {
-      itemsPerPage: 15,
+      itemsPerPage: 13,
       currentPage: 1,
       totalItems: this.collection.count
     };
