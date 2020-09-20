@@ -11,8 +11,9 @@ exports.createOrder = async (req, res) => {
     );
   };
 
-  const gctTax = 0.165 * req.body.total;
-  const totalcost = Math.round(gctTax * 100) / 100 + req.body.total;
+  const total_q = req.body.total * req.body.quantity;
+  const gctTax = 0.165 * total_q;
+  const totalcost = Math.round(gctTax * 100) / 100 + total_q;
 
   try {
     let order = new Order({
