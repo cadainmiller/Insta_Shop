@@ -36,6 +36,7 @@
       <thead>
         <tr>
           <th scope="col">#</th>
+          <th scope="col">Status</th>
           <th scope="col">Customer Name</th>
           <th scope="col">Email Address</th>
           <th scope="col">Product IDs</th>
@@ -55,6 +56,9 @@
           "
         >
           <th scope="row">{{ order.orderId }}</th>
+          <td>
+            {{ order.status ? order.status : "&mdash;" }}
+          </td>
           <td>
             {{
               order.customer_info.first_name

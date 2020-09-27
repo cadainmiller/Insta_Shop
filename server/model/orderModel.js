@@ -128,6 +128,10 @@ const orderSchema = new Schema(
     order_receipt: {
       type: String,
     },
+    status: {
+      type: String,
+      // required: true,
+    },
   },
   {
     timestamps: true,
