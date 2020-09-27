@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from 'src/app/component/services/order.service';
 
 @Component({
   selector: 'app-admin-orders',
@@ -9,18 +10,17 @@ export class AdminOrdersComponent implements OnInit {
 
   config: any;
   collection = { count: 60, data: [] };
+  orders:any;
 
-  constructor() {
+  constructor(private orderService: OrderService) {
 
-    //Create dummy data
-    for (var i = 0; i < this.collection.count; i++) {
-      this.collection.data.push(
-        {
-          id: i + 1,
-          value: "items number " + (i + 1)
-        }
-      );
-    }
+    
+    this.orderService.getAllOrder().subscribe((data => {
+      console.log(data)
+      this.collection.data = data;
+      //this.orders = data;
+
+    }))
 
     this.config = {
       itemsPerPage: 13,
