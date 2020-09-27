@@ -30,4 +30,10 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  sendInvoice(orderID: string) {
+    console.log(orderID);
+  }
+
+  processOrder() {}
 }
