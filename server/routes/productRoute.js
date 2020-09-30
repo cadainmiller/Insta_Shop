@@ -23,6 +23,8 @@ router.post(
 );
 router.get("/",auth, productController.getProduct);
 
+router.get("/pdf", auth, productController.createPDF);
+
 router.get("/:productId", auth, productController.getProductById);
 router.get("/productID/:productId", auth, productController.getProductByPD);
 router.put("/:productId", auth, productController.updateProductById);

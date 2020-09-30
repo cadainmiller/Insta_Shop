@@ -1,6 +1,8 @@
 const Product = require("../model/productModel");
 const e = require("express");
 const multer = require("multer");
+const pdfMake = require("../pdfmake/pdfmake");
+const vfsFonts = require("../pdfmake/vfs_fonts");
 
 const product_image = multer({
   limits: {
@@ -12,6 +14,23 @@ const product_image = multer({
     cb(undefined, true);
   },
 });
+
+exports.createPDF = async (req, res) => {
+  var documentDefinition = {
+    content: [`Hello`, "Nice to meet you!"],
+  };
+
+  const pdfDoc = pdfMake.createPdf(documentDefinition);
+  pdfDoc.getBase64((data) => {
+    res.writeHead(200, {
+      "Content-Type": "application/pdf",
+      "Content-Disposition": 'attachment;filename="filename.pdf"',
+    });
+
+    const download = Buffer.from(data.toString("utf-8"), "base64");
+    res.end(download);
+  });
+};
 
 exports.addNewProduct = async (req, res) => {
   const uniqueId = (length = 8) => {
@@ -104,14 +123,16 @@ exports.getProductById = async (req, res, next) => {
 exports.getProductByPD = async (req, res, next) => {
   try {
     const productId = req.params.productId;
-    const product = await Product.findOne({"productId": productId}).exec((err, product) => {
-      if (err) {
-        res.status(500).json(err);
-      } else if (!product) {
-        res.status(404).json("Product does not exist");
+    const product = await Product.findOne({ productId: productId }).exec(
+      (err, product) => {
+        if (err) {
+          res.status(500).json(err);
+        } else if (!product) {
+          res.status(404).json("Product does not exist");
+        }
+        res.status(200).json(product);
       }
-      res.status(200).json(product);
-    });
+    );
   } catch (error) {
     next(error);
   }
