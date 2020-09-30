@@ -2,42 +2,55 @@ const Invoice = require("../model/invoiceModel");
 const orderController = require("../controller/orderController");
 const pdfMake = require("../pdfmake/pdfmake");
 const vfsFonts = require("../pdfmake/vfs_fonts");
+const events = require("events");
+const { emit } = require("process");
 
 pdfMake.vfs = vfsFonts.pdfMake.vfs;
+var eventEmitter = new events.EventEmitter();
+
+var invoicepdf = "";
+var createInvoice = {};
+
+var documentDefinition = {
+  info: {
+    title: "awesome Document",
+    author: "john doe",
+    subject: "subject of document",
+    keywords: "keywords for document",
+  },
+  content: [`Hello`, "Nice to meet you!"],
+};
+
+function functionData(data) {
+  if (data) {
+    //eventEmitter.emit("urlReady", data);
+    invoicepdf = data;
+  }
+}
+
+function pdfHandler(data) {
+  invoicepdf = data;
+}
+
+function createDoc(info) {
+  var pdfsomething = pdfMake.createPdf(info);
+  pdfsomething.getDataUrl(functionData);
+  // eventEmitter.on("urlReady", pdfHandler);
+}
+
+createDoc(documentDefinition);
 
 exports.createInvoice = async (req, res) => {
   try {
-    // const order = await orderController.invoiceId.find({
-    //   _id: new mongoose.Types.ObjectId(req.body.order),
-    // });
-    // console.log(order);
-
-    var documentDefinition = {
-      content: [`Hello`, "Nice to meet you!"],
-    };
-
-    let base64 = "";
-
-    // pdfMake.createPdf(documentDefinition).getDataUrl(
-    //   function (dataURL) {
-    //     base64 = dataURL;
-    //   }.bind(this)
-    // );
-
-    pdfMake.createPdf(documentDefinition).getDataUrl(function (dataURL) {
-      base64 = dataURL;
-    });
-
-    console.log("BASE" + base64.toString());
-
     let invoice = new Invoice({
       invoiceId: req.body.invoiceId,
       order: req.body.order,
       notes: req.body.notes,
-      invoiceDoc: base64,
+      invoiceDoc: invoicepdf,
     });
 
     let createInvoice = await invoice.save();
+
     res.status(200).json({
       msg: "New Invoice created",
       data: createInvoice,
