@@ -16,15 +16,25 @@ exports.createInvoice = async (req, res) => {
       content: [`Hello`, "Nice to meet you!"],
     };
 
+    let base64 = "";
+
+    // pdfMake.createPdf(documentDefinition).getDataUrl(
+    //   function (dataURL) {
+    //     base64 = dataURL;
+    //   }.bind(this)
+    // );
+
     pdfMake.createPdf(documentDefinition).getDataUrl(function (dataURL) {
-      console.log(dataURL);
+      base64 = dataURL;
     });
+
+    console.log("BASE" + base64.toString());
 
     let invoice = new Invoice({
       invoiceId: req.body.invoiceId,
       order: req.body.order,
       notes: req.body.notes,
-      
+      invoiceDoc: base64,
     });
 
     let createInvoice = await invoice.save();
