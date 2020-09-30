@@ -4,6 +4,9 @@ const multer = require("multer");
 const pdfMake = require("../pdfmake/pdfmake");
 const vfsFonts = require("../pdfmake/vfs_fonts");
 
+
+pdfMake.vfs = vfsFonts.pdfMake.vfs;
+
 const product_image = multer({
   limits: {
     fileSize: 1000000,
