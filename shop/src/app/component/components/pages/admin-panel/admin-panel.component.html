@@ -1,34 +1,47 @@
-<div class="row">
-  <div class="col-xl-6 col-sm-6 mb-6">
-    <div class="card text-white bg-warning o-hidden h-100">
-      <div class="card-body card-size">
-        <div class="card-body-icon">
-          <i> <ion-icon class="mr-2" name="server"></ion-icon></i>
+<div class="row mb-3">
+  <div class="col-xl-3 col-lg-6">
+    <div class="card card-inverse card-success">
+      <div class="card-block bg-success">
+        <div class="rotate">
+          <i><ion-icon class="mr-2" name="server"></ion-icon></i>
         </div>
-        <div class="mr-5">11 Products!</div>
+        <h6 class="text-uppercase pt-2">Products</h6>
+        <h1 class="display-1">{{productsData.length}}</h1>
       </div>
-      <a class="card-footer text-white clearfix small z-1" href="#">
-        <span class="float-left">View Products</span>
-        <span class="float-right">
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </a>
     </div>
   </div>
-  <div class="col-xl-6 col-sm-6 mb-6">
-    <div class="card text-white bg-success o-hidden h-100">
-      <div class="card-size card-body">
-        <div class="card-body-icon">
-          <i> <ion-icon class="mr-2" name="server"></ion-icon></i>
+  <div class="col-xl-3 col-lg-6">
+    <div class="card card-inverse card-danger">
+      <div class="card-block bg-danger">
+        <div class="rotate">
+          <i><ion-icon class="mr-2" name="boat"></ion-icon></i>
         </div>
-        <div class="mr-5">123 Orders!</div>
+        <h6 class="text-uppercase pt-2">Orders</h6>
+        <h1 class="display-1">{{ordersData.length}}</h1>
       </div>
-      <a class="card-footer text-white clearfix small z-1" href="#">
-        <span class="float-left">View Orders</span>
-        <span class="float-right">
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </a>
     </div>
   </div>
+  <div class="col-xl-3 col-lg-6">
+    <div class="card card-inverse card-info">
+      <div class="card-block bg-info">
+        <div class="rotate">
+          <i><ion-icon class="mr-2" name="boat"></ion-icon></i>
+        </div>
+        <h6 class="text-uppercase pt-2">Tweets</h6>
+        <h1 class="display-1">125</h1>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-xl-3 col-lg-6">
+    <div class="card card-inverse card-warning">
+      <div class="card-block bg-warning">
+        <div class="rotate">
+          <i class="fa fa-share fa-5x"><ion-icon class="mr-2" name="boat"></ion-icon></i>
+        </div>
+        <h6 class="text-uppercase pt-2">Shares</h6>
+        <h1 class="display-1">36</h1>
+      </div>
+    </div>
+  </div> -->
 </div>
+<!--/row-->
