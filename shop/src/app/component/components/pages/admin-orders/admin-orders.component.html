@@ -31,7 +31,11 @@
       ></ag-grid-angular>
     </div> -->
 
-  <div *ngIf="collection.data.length <= 0" class="card-body px-2 py-2" style="width: 100%; height: 800px">
+  <div
+    *ngIf="collection.data.length >= 0"
+    class="card-body px-2 py-2"
+    style="width: 100%; height: 800px"
+  >
     <table class="table">
       <thead>
         <tr>
@@ -125,12 +129,11 @@
       (pageChange)="pageChanged($event)"
     ></pagination-controls>
   </div>
-</div>
-
-<div
-  *ngIf="collection.data.length <= 0"
-  class="alert alert-primary"
-  role="alert"
->
-  There are on orders...
+  <div
+    *ngIf="collection.data.length <= 0"
+    class="alert alert-primary"
+    role="alert"
+  >
+    There are on orders...
+  </div>
 </div>

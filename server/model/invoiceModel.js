@@ -13,11 +13,12 @@ const invoiceSchema = new Schema(
     order: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Order",
-      //required: true,
     },
     notes: {
       type: String,
-      required: true,
+    },
+    invoiceDoc: {
+      type: String,
     },
   },
   {

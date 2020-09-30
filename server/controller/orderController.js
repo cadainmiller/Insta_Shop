@@ -56,6 +56,22 @@ exports.getOrders = async (req, res, next) => {
   });
 };
 
+exports.getOrderById = async (req, res, next) => {
+  try {
+    const _id = req.params._id;
+    const order = await Order.findById(_id).exec((err, order) => {
+      if (err) {
+        res.status(500).json(err);
+      } else if (!order) {
+        res.status(404).json("Product does not exist");
+      }
+      res.status(200).json(order);
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Story.
 // findOne({ title: 'Casino Royale' }).
 // populate('author').

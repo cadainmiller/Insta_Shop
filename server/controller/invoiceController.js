@@ -1,11 +1,30 @@
 const Invoice = require("../model/invoiceModel");
+const orderController = require("../controller/orderController");
+const pdfMake = require("../pdfmake/pdfmake");
+const vfsFonts = require("../pdfmake/vfs_fonts");
+
+pdfMake.vfs = vfsFonts.pdfMake.vfs;
 
 exports.createInvoice = async (req, res) => {
   try {
+    // const order = await orderController.invoiceId.find({
+    //   _id: new mongoose.Types.ObjectId(req.body.order),
+    // });
+    // console.log(order);
+
+    var documentDefinition = {
+      content: [`Hello`, "Nice to meet you!"],
+    };
+
+    pdfMake.createPdf(documentDefinition).getDataUrl(function (dataURL) {
+      console.log(dataURL);
+    });
+
     let invoice = new Invoice({
       invoiceId: req.body.invoiceId,
       order: req.body.order,
       notes: req.body.notes,
+      
     });
 
     let createInvoice = await invoice.save();
