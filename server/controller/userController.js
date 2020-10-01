@@ -14,16 +14,16 @@ exports.registerNewUser = async (req, res) => {
     user.password = await user.hashPassword(req.body.password);
     let createdUser = await user.save();
 
-    // Email.SendEmail(
-    //   createdUser.email,
-    //   "Welocme to Company ",
-    //   "<p>Hey " +
-    //     createdUser.name +
-    //     "</p><p>Welcome to " +
-    //     process.env.COMPANY_NAME +
-    //     ".</p><p> You can use the link below to change your password from default </p><p>Username: " +
-    //     createdUser.email
-    // );
+    Email.SendEmail(
+      createdUser.email,
+      "Welocme to Company ",
+      "<p>Hey " +
+        createdUser.name +
+        "</p><p>Welcome to " +
+        process.env.COMPANY_NAME +
+        ".</p><p> You can use the link below to change your password from default </p><p>Username: " +
+        createdUser.email
+    );
 
     res.status(200).json({
       msg: "New user created",

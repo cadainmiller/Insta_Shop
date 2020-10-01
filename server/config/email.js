@@ -2,15 +2,14 @@ const nodemailer = require("nodemailer");
 
 require("dotenv").config();
 
-const SendEmail = (to, subject, body) => {
+const SendEmail = (to, subject, body, attachments) => {
   const config = {
     mailserver: {
       host: "smtp.mailtrap.io",
-      port: process.env.EMAIL_PORT,
-      secure: false,
+      port: 2525,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+        user: "aac716e250df4f",
+        pass: "045bc724552043",
       },
     },
     mail: {
@@ -18,6 +17,7 @@ const SendEmail = (to, subject, body) => {
       to: to,
       subject: subject,
       html: body,
+      attachments: attachments,
     },
   };
   const sendMail = async ({ mailserver, mail }) => {
