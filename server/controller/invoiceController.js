@@ -79,3 +79,20 @@ exports.getInvoice = async (req, res, next) => {
     });
   });
 };
+
+exports.getInvoiceById = async (req, res, next) => {
+  try {
+    const invoiceId = req.params.invoiceId;
+    const invoice = await Invoice.findOne({ invoiceId: invoiceId }).exec((err, invoice) => {
+      if (err) {
+        res.status(500).json(err);
+      } else if (!invoice) {
+        res.status(404).json("Invoice does not exist");
+      }
+      res.status(200).json(invoice);
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
