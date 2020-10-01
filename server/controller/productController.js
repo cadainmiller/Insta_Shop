@@ -121,6 +121,7 @@ exports.getProductById = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+  
 };
 
 exports.getProductByPD = async (req, res, next) => {
