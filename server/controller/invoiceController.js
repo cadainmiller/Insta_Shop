@@ -1,5 +1,5 @@
 const Invoice = require("../model/invoiceModel");
-const Product = require("../model/productModel");
+const generateId = require("../shared/createUniqueId");
 const orderController = require("../controller/orderController");
 const pdfMake = require("../pdfmake/pdfmake");
 const vfsFonts = require("../pdfmake/vfs_fonts");
@@ -41,31 +41,13 @@ function createDoc(info) {
   pdfsomething.getDataUrl(functionData);
   // eventEmitter.on("urlReady", pdfHandler);
 }
-
-async function getProductById(id) {
-  try {
-    const product = await Product.findOne({ productId: id }).exec(
-      (err, product) => {
-        if (err) {
-          res.status(500).json(err);
-        } else if (!product) {
-          res.status(404).json("Product does not exist");
-        }
-        res.status(200).json(product);
-        console.log("HERE")
-      }
-    );
-  } catch (error) {
-    next(error);
-  }
-}
-
 createDoc(documentDefinition);
 
 exports.createInvoice = async (req, res) => {
+
   try {
     let invoice = new Invoice({
-      invoiceId: req.body.invoiceId,
+      invoiceId: "INV-" + generateId(),
       order: req.body.order,
       notes: req.body.notes,
       invoiceDoc: invoicepdf,
@@ -132,7 +114,6 @@ exports.emailInvoiceById = async (req, res, next) => {
         }
         sendData = invoice.invoiceDoc.toString();
         productid = invoice.order.toString();
-        getProductById(productid);
         id = invoice.invoiceId.toString();
         const [head, data] = sendData.split(",");
         Email.SendEmail("TestEMail@test.com", "Welocme to Company ", data, [

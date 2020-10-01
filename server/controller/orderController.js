@@ -1,15 +1,8 @@
+const generateId = require("../shared/createUniqueId");
 const Order = require("../model/orderModel");
 const Product = require("../model/productModel");
 
 exports.createOrder = async (req, res) => {
-  const uniqueId = (length = 8) => {
-    return parseInt(
-      Math.ceil(Math.random() * Date.now())
-        .toPrecision(length)
-        .toString()
-        .replace(".", "")
-    );
-  };
 
   const total_q = req.body.total * req.body.quantity;
   const gctTax = 0.165 * total_q;
@@ -17,7 +10,7 @@ exports.createOrder = async (req, res) => {
 
   try {
     let order = new Order({
-      orderId: "ORD-" + uniqueId(),
+      orderId: "ORD-" + generateId(),
       status: req.body.status,
       customer_info: req.body.customer_info,
       quantity: req.body.quantity,

@@ -1,4 +1,5 @@
 const Product = require("../model/productModel");
+const generateId = require("../shared/createUniqueId");
 const e = require("express");
 const multer = require("multer");
 const pdfMake = require("../pdfmake/pdfmake");
@@ -36,22 +37,6 @@ exports.createPDF = async (req, res) => {
 };
 
 exports.addNewProduct = async (req, res) => {
-  const uniqueId = (length = 8) => {
-    return parseInt(
-      Math.ceil(Math.random() * Date.now())
-        .toPrecision(length)
-        .toString()
-        .replace(".", "")
-    );
-  };
-
-  // let buff = new Buffer(req.file.buffer);
-  // let base64data = buff.toString("base64");
-
-  //let base64data = req.file.buffer.toString("base64");
-  // let imgUrl = new Buffer(base64data, 'base64');
-
-  //console.log(base64data);
 
   function squared(num) {
     if (num == "true") {
@@ -66,7 +51,7 @@ exports.addNewProduct = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       product_image: req.body.product_image,
-      productId: "PD" + uniqueId(),
+      productId: "PRO-" + generateId(),
       shipping_details: req.body.shipping_details,
       quantity: req.body.quantity,
       sale: req.body.sale,
