@@ -16,7 +16,7 @@ var pdfdoc =
 
 var documentDefinition = {
   info: {
-    title: "awesome Document",
+    title: "INVOICE",
     author: "john doe",
     subject: "subject of document",
     keywords: "keywords for document",
