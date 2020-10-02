@@ -8,8 +8,8 @@ const SendEmail = (to, subject, body, attachments) => {
       host: "smtp.mailtrap.io",
       port: 2525,
       auth: {
-        user: "ba7da743109374",
-        pass: "7aa9b6fba2cb31",
+        user: "cf53c3c0db5f08",
+        pass: "e2d1763af36fab",
       },
     },
     mail: {

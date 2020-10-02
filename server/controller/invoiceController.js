@@ -1,7 +1,7 @@
 const Invoice = require("../model/invoiceModel");
 const generateId = require("../shared/createUniqueId");
 const fetch = require("node-fetch");
-const url = "http://localhost:4000/order/ORD-60832501";
+const url = "http://localhost:4000/";
 const orderController = require("../controller/orderController");
 const pdfMake = require("../pdfmake/pdfmake");
 const vfsFonts = require("../pdfmake/vfs_fonts");
@@ -39,12 +39,17 @@ const getData = async (url) => {
   } catch (error) {}
 };
 
-getData(url);
-
-createDoc(invoiceCreateDoc.create("INVOICE", "This is the subject"));
+//createDoc(invoiceCreateDoc.create("INVOICE", "This is the subject"));
 
 exports.createInvoice = async (req, res) => {
   try {
+    
+    invoicepdf = await createDoc(invoiceCreateDoc.create("INVOICE", "This is the subject"));;
+    const orderId = req.body.orderId;
+    const response = await fetch(`${url}order/${orderId}`);
+    const json = await response.json();
+    productData = json;
+
     let invoice = new Invoice({
       invoiceId: "INV-" + generateId(),
       order: productData,
@@ -59,7 +64,7 @@ exports.createInvoice = async (req, res) => {
       data: createInvoice,
       request: {
         type: "GET",
-        url: "http://localhost:4000/" + createInvoice._id,
+        url: "http://localhost:4000/invoice/" + createInvoice.invoiceId,
       },
     });
   } catch (err) {
@@ -116,16 +121,21 @@ exports.emailInvoiceById = async (req, res, next) => {
         productid = invoice.order.toString();
         id = invoice.invoiceId.toString();
         const [head, data] = sendData.split(",");
-        Email.SendEmail("TestEMail@test.com", "Welocme to Company ", productid, [
-          {
-            filename: `INVOICE-${id}.pdf`,
-            content: sendData.split("base64,")[1],
-            contentType: "application/pdf",
-            encoding: "base64",
-          },
-        ]);
+        Email.SendEmail(
+          "TestEMail@test.com",
+          "Welocme to Company ",
+          productid,
+          [
+            {
+              filename: `INVOICE-${id}.pdf`,
+              content: sendData.split("base64,")[1],
+              contentType: "application/pdf",
+              encoding: "base64",
+            },
+          ]
+        );
         //console.log(productData);
-
+        //getData(url);
         res.status(200).json({ Invoice: invoice });
       }
     );
