@@ -42,35 +42,24 @@ const getData = async (url) => {
 //createDoc(invoiceCreateDoc.create("INVOICE", "This is the subject"));
 
 exports.createInvoice = async (req, res) => {
-
-  const orderId = req.body.orderId;
-  const response = await fetch(`${url}order/${orderId}`);
-  const json = await response.json();
-
   try {
-    const invoiceID = "INV-" + generateId();
-    const invoiceNotes = req.body.notes;
 
+   const invoiceId = "INV-" + generateId();
+   const notes = req.body.notes;
     invoicepdf = await createDoc(
-      invoiceCreateDoc.create(
-        "INVOICE",
-        "This is the subject",
-        invoiceID,
-        invoiceNotes,
-        json
-      )
+      invoiceCreateDoc.create("INVOICE", "This is the subject", invoiceId, notes)
     );
 
-    // const orderId = req.body.orderId;
-    // const response = await fetch(`${url}order/${orderId}`);
-    // const json = await response.json();
+    const orderId = req.body.orderId;
+    const response = await fetch(`${url}order/${orderId}`);
+    const json = await response.json();
 
     productData = json;
 
     let invoice = new Invoice({
-      invoiceId: invoiceID,
+      invoiceId: invoiceId,
       order: productData,
-      notes: invoiceNotes,
+      notes: notes,
       invoiceDoc: invoicepdf,
     });
 

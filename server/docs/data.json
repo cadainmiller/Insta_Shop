@@ -1,0 +1,71 @@
+{
+    "invoice": {
+      "order": {
+        "customer_info": {
+          "phone_number": [
+            3233343332
+          ],
+          "first_name": "Jake J",
+          "last_name": "Jett",
+          "email": "dtngepmch7e@temporary-mail.net"
+        },
+        "shipping_address": {
+          "street": "4040  Norman Street",
+          "street2": "",
+          "city": "Los Angeles",
+          "parish": "California",
+          "zip": "99936"
+        },
+        "orderId": "ORD-10330938",
+        "status": "Processed",
+        "quantity": 10,
+        "products": [
+          {
+            "shipping_details": {
+              "weight": 100,
+              "width": 250,
+              "height": 10,
+              "depth": 0
+            },
+            "quantity": 5,
+            "sale": "false",
+            "price": 10000,
+            "sale_price": 0,
+            "_id": "5f58f24ebd629e36e438f7c0",
+            "name": "STI",
+            "description": "Car that was made to go fast",
+            "product_image": "LInk HERE",
+            "productId": "PD13463875"
+          },
+          {
+            "shipping_details": {
+              "weight": 100,
+              "width": 250,
+              "height": 10,
+              "depth": 0
+            },
+            "quantity": 5,
+            "sale": "false",
+            "price": 10000,
+            "sale_price": 0,
+            "_id": "5f58f24ebd629e36e438f7c0",
+            "name": "STI",
+            "description": "Car that was made to go fast",
+            "product_image": "LInk HERE",
+            "productId": "PD13463875"
+          }
+        ],
+        "notes": "Notes Should Be Here",
+        "total": 1000,
+        "tax": 1650,
+        "final_cost": 11650,
+        "shipping": ""
+      },
+      "_id": "5f776472ff751f4928563a74",
+      "invoiceId": "INV-62633613",
+      "notes": "Something sahsss 4",
+      "createdAt": "2020-10-02T17:33:38.821Z",
+      "updatedAt": "2020-10-02T17:33:38.821Z",
+      "__v": 0
+    }
+  }
