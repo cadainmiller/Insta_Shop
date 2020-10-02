@@ -6,10 +6,10 @@ const SendEmail = (to, subject, body, attachments) => {
   const config = {
     mailserver: {
       host: "smtp.mailtrap.io",
-      port: process.env.EMAIL_PORT,
+      port: 2525,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+        user: "ba7da743109374",
+        pass: "7aa9b6fba2cb31",
       },
     },
     mail: {
