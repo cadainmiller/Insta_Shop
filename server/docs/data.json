@@ -49,7 +49,41 @@
             "price": 10000,
             "sale_price": 0,
             "_id": "5f58f24ebd629e36e438f7c0",
-            "name": "STI",
+            "name": "CARRR",
+            "description": "Car that was made to go fast",
+            "product_image": "LInk HERE",
+            "productId": "PD13463875"
+          },
+          {
+            "shipping_details": {
+              "weight": 100,
+              "width": 250,
+              "height": 10,
+              "depth": 0
+            },
+            "quantity": 5,
+            "sale": "false",
+            "price": 10000,
+            "sale_price": 0,
+            "_id": "5f58f24ebd629e36e438f7c0",
+            "name": "CARR3",
+            "description": "Car that was made to go fast",
+            "product_image": "LInk HERE",
+            "productId": "PD13463875"
+          },
+          {
+            "shipping_details": {
+              "weight": 100,
+              "width": 250,
+              "height": 10,
+              "depth": 0
+            },
+            "quantity": 5,
+            "sale": "false",
+            "price": 10000,
+            "sale_price": 0,
+            "_id": "5f58f24ebd629e36e438f7c0",
+            "name": "CARR4",
             "description": "Car that was made to go fast",
             "product_image": "LInk HERE",
             "productId": "PD13463875"

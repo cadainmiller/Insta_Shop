@@ -7,28 +7,50 @@ const create = (title, subject, id, notes, order) => {
   const today = new Date();
   const invoiceDateCreated = today.toLocaleDateString("en-US");
 
+  function table(data, columns) {
+    return {
+      table: {
+        headerRows: 1,
+        body: this.buildTableBody(data, columns),
+      },
+    };
+  }
+
+  function generateRows(payrolls) {
+    var tempObj = {};
+    var tempArr = [];
+    for (var i = 0; i < data.invoice.order.products.length; i++) {
+      tempArr.push({
+        ID: payrolls[i].wageTypeId,
+        description: payrolls[i].wageType.description,
+        amount: payrolls[i].amount,
+        unit: payrolls[i].unit,
+        total: payrolls[i].total,
+      });
+    }
+  }
+
   function GetProducts() {
-    for (index in data.invoice.order.products) {
-      console.log(data.invoice.order.products[index]);
-      const datata = [
+    const buildTable = [];
+    for (const element of data.invoice.order.products) {
+      const productTable = [
         {
-          text: `${data.invoice.order.products[index].name}`,
+          text: `${element.name}`,
           border: [false, false, false, true],
           margin: [0, 5, 0, 5],
           alignment: "left",
         },
         {
           border: [false, false, false, true],
-          text: `$${data.invoice.order.products[index].price}`,
+          text: `$${element.price}`,
           fillColor: "#f5f5f5",
           alignment: "right",
           margin: [0, 5, 0, 5],
         },
       ];
-      index += 1;
-      return datata;
+      buildTable.push(productTable);
     }
-    
+    return buildTable;
   }
   const ProductsData = GetProducts();
   console.log(ProductsData);
