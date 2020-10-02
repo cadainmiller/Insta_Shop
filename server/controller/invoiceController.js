@@ -1,7 +1,7 @@
 const Invoice = require("../model/invoiceModel");
 const generateId = require("../shared/createUniqueId");
 const fetch = require("node-fetch");
-const url = "https://jsonplaceholder.typicode.com/posts/1";
+const url = "http://localhost:4000/order/ORD-60832501";
 const orderController = require("../controller/orderController");
 const pdfMake = require("../pdfmake/pdfmake");
 const vfsFonts = require("../pdfmake/vfs_fonts");
@@ -14,11 +14,10 @@ pdfMake.vfs = vfsFonts.pdfMake.vfs;
 var eventEmitter = new events.EventEmitter();
 
 var invoicepdf = "";
-var createInvoice = {};
+var productData;
 
 function functionData(data) {
   if (data) {
-    //eventEmitter.emit("urlReady", data);
     invoicepdf = data;
   }
 }
@@ -30,27 +29,25 @@ function pdfHandler(data) {
 function createDoc(info) {
   var pdfsomething = pdfMake.createPdf(info);
   pdfsomething.getDataUrl(functionData);
-  // eventEmitter.on("urlReady", pdfHandler);
 }
 
 const getData = async (url) => {
   try {
     const response = await fetch(url);
     const json = await response.json();
-    console.log(json);
-  } catch (error) {
-    console.log(error);
-  }
+    productData = json;
+  } catch (error) {}
 };
+
+getData(url);
 
 createDoc(invoiceCreateDoc.create("INVOICE", "This is the subject"));
 
 exports.createInvoice = async (req, res) => {
-
   try {
     let invoice = new Invoice({
       invoiceId: "INV-" + generateId(),
-      order: req.body.order,
+      order: productData,
       notes: req.body.notes,
       invoiceDoc: invoicepdf,
     });
@@ -104,10 +101,8 @@ exports.getInvoiceById = async (req, res, next) => {
   }
 };
 
-
 exports.emailInvoiceById = async (req, res, next) => {
   try {
-    getData(url);
     const invoiceId = req.params.invoiceId;
     const invoice = await Invoice.findOne({ invoiceId: invoiceId }).exec(
       (err, invoice) => {
@@ -121,7 +116,7 @@ exports.emailInvoiceById = async (req, res, next) => {
         productid = invoice.order.toString();
         id = invoice.invoiceId.toString();
         const [head, data] = sendData.split(",");
-        Email.SendEmail("TestEMail@test.com", "Welocme to Company ", data, [
+        Email.SendEmail("TestEMail@test.com", "Welocme to Company ", productid, [
           {
             filename: `INVOICE-${id}.pdf`,
             content: sendData.split("base64,")[1],
@@ -129,7 +124,9 @@ exports.emailInvoiceById = async (req, res, next) => {
             encoding: "base64",
           },
         ]);
-        res.status(200).json(invoice);
+        //console.log(productData);
+
+        res.status(200).json({ Invoice: invoice });
       }
     );
   } catch (error) {

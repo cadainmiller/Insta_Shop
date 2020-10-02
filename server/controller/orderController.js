@@ -65,6 +65,24 @@ exports.getOrderById = async (req, res, next) => {
   }
 };
 
+exports.getOrderByID = async (req, res, next) => {
+  try {
+    const orderId = req.params.orderId;
+    const order = await Order.findOne({ orderId: orderId }).exec(
+      (err, order) => {
+        if (err) {
+          res.status(500).json(err);
+        } else if (!order) {
+          res.status(404).json("Order does not exist");
+        }
+        res.status(200).json(order);
+      }
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Story.
 // findOne({ title: 'Casino Royale' }).
 // populate('author').
