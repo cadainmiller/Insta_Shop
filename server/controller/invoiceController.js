@@ -1,9 +1,11 @@
 const Invoice = require("../model/invoiceModel");
 const generateId = require("../shared/createUniqueId");
+const fetch = require("node-fetch");
+const url = "https://jsonplaceholder.typicode.com/posts/1";
 const orderController = require("../controller/orderController");
 const pdfMake = require("../pdfmake/pdfmake");
 const vfsFonts = require("../pdfmake/vfs_fonts");
-const invoiceCreateDoc = require('../docs/invoiceCreateDoc')
+const invoiceCreateDoc = require("../docs/invoiceCreateDoc");
 const events = require("events");
 const Email = require("../config/email");
 require("dotenv").config();
@@ -30,6 +32,16 @@ function createDoc(info) {
   pdfsomething.getDataUrl(functionData);
   // eventEmitter.on("urlReady", pdfHandler);
 }
+
+const getData = async (url) => {
+  try {
+    const response = await fetch(url);
+    const json = await response.json();
+    console.log(json);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 createDoc(invoiceCreateDoc.create("INVOICE", "This is the subject"));
 
@@ -92,8 +104,10 @@ exports.getInvoiceById = async (req, res, next) => {
   }
 };
 
+
 exports.emailInvoiceById = async (req, res, next) => {
   try {
+    getData(url);
     const invoiceId = req.params.invoiceId;
     const invoice = await Invoice.findOne({ invoiceId: invoiceId }).exec(
       (err, invoice) => {
@@ -102,6 +116,7 @@ exports.emailInvoiceById = async (req, res, next) => {
         } else if (!invoice) {
           res.status(404).json("Invoice does not exist");
         }
+
         sendData = invoice.invoiceDoc.toString();
         productid = invoice.order.toString();
         id = invoice.invoiceId.toString();
