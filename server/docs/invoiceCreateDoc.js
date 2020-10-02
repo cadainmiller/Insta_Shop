@@ -31,9 +31,9 @@ const create = (title, subject, id, notes, order) => {
   }
 
   function GetProducts() {
-    const buildTable = [];
+    var buildTable;
     for (const element of data.invoice.order.products) {
-      const productTable = [
+      buildTable = [
         {
           text: `${element.name}`,
           border: [false, false, false, true],
@@ -48,7 +48,6 @@ const create = (title, subject, id, notes, order) => {
           margin: [0, 5, 0, 5],
         },
       ];
-      buildTable.push(productTable);
     }
     return buildTable;
   }
@@ -301,8 +300,8 @@ const create = (title, subject, id, notes, order) => {
                 textTransform: "uppercase",
               },
             ],
-            ProductsData,
           ],
+          ProductsData,
         },
       },
       "\n",
