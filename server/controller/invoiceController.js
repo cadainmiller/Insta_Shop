@@ -127,18 +127,22 @@ exports.emailInvoiceById = async (req, res, next) => {
         productid = invoice.order.toString();
         id = invoice.invoiceId.toString();
         const [head, data] = sendData.split(",");
+
+        const attachment = [
+          {
+            filename: `INVOICE-${id}.pdf`,
+            content: sendData.split("base64,")[1],
+            contentType: "application/pdf",
+            encoding: "base64",
+          },
+        ]
+
         Email.SendEmail(
           "TestEMail@test.com",
           "Welocme to Company ",
           productid,
-          [
-            {
-              filename: `INVOICE-${id}.pdf`,
-              content: sendData.split("base64,")[1],
-              contentType: "application/pdf",
-              encoding: "base64",
-            },
-          ]
+          attachment
+          
         );
         //console.log(productData);
         //getData(url);
