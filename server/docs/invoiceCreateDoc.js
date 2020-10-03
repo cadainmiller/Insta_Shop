@@ -72,7 +72,7 @@ const create = (title, subject, id, notes, order) => {
     return tempArr;
   }
   const ProductsData = GetProducts(data.invoice.order.products);
-  console.log(ProductsData);
+  //console.log(ProductsData);
 
   const documentDefinition = {
     info: {
