@@ -4,6 +4,7 @@ const data = require("./data.json");
 const create = (title, subject, id, notes, order) => {
   //const data = { orderId: "ORD-10330938", status: "Processed" };
   const splitId = id.split("-");
+  const companyName = 'Your Company Name'
   const today = new Date();
   const invoiceDateCreated = today.toLocaleDateString("en-US");
 
@@ -80,6 +81,37 @@ const create = (title, subject, id, notes, order) => {
       author: "john doe",
       subject: subject,
       keywords: "keywords for document",
+    },
+    footer: function (currentPage, pageCount) {
+      if (currentPage != 1) {
+        return {
+          margin: 5,
+          columns: [
+            {
+              fontSize: 9,
+              text: [
+                {
+                  text:
+                    `${companyName} © ${today.getFullYear()}` 
+                },
+              ],
+              alignment: "left",
+            },
+            {
+                fontSize: 9,
+                text: [
+                  {
+                    text:
+                      currentPage.toString() +
+                      " / " +
+                      pageCount,
+                  },
+                ],
+                alignment: "right",
+              },
+          ],
+        };
+      }
     },
     content: [
       {

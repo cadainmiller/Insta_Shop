@@ -17,7 +17,7 @@ exports.createOrder = async (req, res) => {
       products: req.body.products,
       notes: req.body.notes,
       total: req.body.total,
-      tax: Math.round(gctTax * 100) / 100,
+      tax: gctTax,
       final_cost: totalcost,
       shipping: req.body.shipping,
       shipping_address: req.body.shipping_address,
