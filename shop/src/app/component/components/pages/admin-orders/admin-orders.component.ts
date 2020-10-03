@@ -14,6 +14,7 @@ export class AdminOrdersComponent implements OnInit {
   collection = { count: 60, data: [] };
   orders: [];
   orderInfo: any;
+  savedData: any = [];
 
   constructor(
     private orderService: OrderService,
@@ -44,16 +45,21 @@ export class AdminOrdersComponent implements OnInit {
   processOrder() {}
 
   openThisOrder(id) {
-    const initialState = {
-      title: 'View Order',
-      action: 'view',
-      orderInfo: this.orderInfo,
-      id: id,
-    };
-    this.bsModalRef = this.modalService.show(ViewOrderComponent, {
-      initialState,
-      class: 'modal-lg modal-dialog-centered',
+    this.orderService.getOrderById(id).subscribe((data) => {
+      let obj = data;
+      this.savedData.push(obj);
+      const initialState = {
+        title: 'View Order',
+        action: 'view',
+        orderInfo: this.orderInfo,
+        id: id,
+        savedData: this.savedData,
+      };
+      this.bsModalRef = this.modalService.show(ViewOrderComponent, {
+        initialState,
+        class: 'modal-lg modal-dialog-centered',
+      });
+      this.bsModalRef.content.closeBtnName = 'Cancel';
     });
-    this.bsModalRef.content.closeBtnName = 'Cancel';
   }
 }

@@ -19,35 +19,23 @@ export class ViewOrderComponent implements OnInit {
   action: string;
   title: string;
   savedData: any = [];
+  productsData: any = [];
 
-  constructor(
-    private orderService: OrderService,
-    public bsModalRef: BsModalRef
-  ) {}
-
-  async getOrderById(id) {
-    let something = await this.orderService
-      .getOrderById(id)
-      .subscribe((data) => {
-        let obj = data;
-        //console.log(obj)
-        this.savedData.push({ name: 'you', description: 'what is array' });
-      });
-
-    console.log(this.savedData);
-  }
+  constructor(public bsModalRef: BsModalRef) {}
 
   OrderForm = new FormGroup({
     orderId: new FormControl(''),
   });
 
+  getProductsArray(data) {
+    console.log(data);
+    for (var item in data) {
+      this.productsData = data[item].products;
+    }
+  }
 
   ngOnInit(): void {
-    if (this.action === 'view') {
-      this.orderService.getOrderById(this.id).subscribe((data) => {
-        let obj = data;
-        console.log(obj);
-      });
-    }
+    this.getProductsArray(this.savedData);
+    console.log(this.productsData);
   }
 }
