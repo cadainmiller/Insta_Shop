@@ -30,28 +30,48 @@ const create = (title, subject, id, notes, order) => {
     }
   }
 
-  function GetProducts() {
+  function GetProducts(payrolls) {
     var buildTable;
-    for (const element of data.invoice.order.products) {
-      buildTable = [
+    var tempArr = [
+      [
         {
-          text: `${element.name}`,
+          text: "ITEM DESCRIPTION",
+          fillColor: "#eaf2f5",
+          border: [false, true, false, true],
+          margin: [0, 5, 0, 5],
+          textTransform: "uppercase",
+        },
+        {
+          text: "ITEM TOTAL",
+          border: [false, true, false, true],
+          alignment: "right",
+          fillColor: "#eaf2f5",
+          margin: [0, 5, 0, 5],
+          textTransform: "uppercase",
+        },
+      ],
+    ];
+
+    for (var i = 0; i < data.invoice.order.products.length; i++) {
+      tempArr.push([
+        {
+          text: `${payrolls[i].name}`,
           border: [false, false, false, true],
           margin: [0, 5, 0, 5],
           alignment: "left",
         },
         {
           border: [false, false, false, true],
-          text: `$${element.price}`,
+          text: `$${payrolls[i].price}`,
           fillColor: "#f5f5f5",
           alignment: "right",
           margin: [0, 5, 0, 5],
         },
-      ];
+      ]);
     }
-    return buildTable;
+    return tempArr;
   }
-  const ProductsData = GetProducts();
+  const ProductsData = GetProducts(data.invoice.order.products);
   console.log(ProductsData);
 
   const documentDefinition = {
@@ -282,55 +302,7 @@ const create = (title, subject, id, notes, order) => {
         table: {
           headerRows: 1,
           widths: ["*", 80],
-          body: [
-            [
-              {
-                text: 'ITEM DESCRIPTION',
-                fillColor: '#eaf2f5',
-                border: [false, true, false, true],
-                margin: [0, 5, 0, 5],
-                textTransform: 'uppercase',
-              },
-              {
-                text: 'ITEM TOTAL',
-                border: [false, true, false, true],
-                alignment: 'right',
-                fillColor: '#eaf2f5',
-                margin: [0, 5, 0, 5],
-                textTransform: 'uppercase',
-              },
-            ],
-            [
-              {
-                text: 'Item 1',
-                border: [false, false, false, true],
-                margin: [0, 5, 0, 5],
-                alignment: 'left',
-              },
-              {
-                border: [false, false, false, true],
-                text: '$999.99',
-                fillColor: '#f5f5f5',
-                alignment: 'right',
-                margin: [0, 5, 0, 5],
-              },
-            ],
-            [
-              {
-                text: 'Item 2',
-                border: [false, false, false, true],
-                margin: [0, 5, 0, 5],
-                alignment: 'left',
-              },
-              {
-                text: '$999.99',
-                border: [false, false, false, true],
-                fillColor: '#f5f5f5',
-                alignment: 'right',
-                margin: [0, 5, 0, 5],
-              },
-            ],
-          ],
+          body: ProductsData,
         },
       },
       "\n",
