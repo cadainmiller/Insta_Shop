@@ -60,7 +60,7 @@
           "
         >
           <th scope="row">
-            <a class="text-primary" (click)=" openThisOrder()">{{ order.orderId }}</a>
+            <a class="text-primary" (click)=" openThisOrder(order.orderId)">{{ order.orderId }}</a>
           </th>
           <td>
             {{ order.status ? order.status : "&mdash;" }}

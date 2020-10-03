@@ -13,6 +13,7 @@ export class AdminOrdersComponent implements OnInit {
   config: any;
   collection = { count: 60, data: [] };
   orders: [];
+  orderInfo: any;
 
   constructor(
     private orderService: OrderService,
@@ -42,12 +43,12 @@ export class AdminOrdersComponent implements OnInit {
 
   processOrder() {}
 
-  openThisOrder() {
-    //console.log(this.ProductIDForm.value);
+  openThisOrder(id) {
     const initialState = {
-      title: 'Update Product',
-      action: 'update',
-      //query: this.ProductIDForm.value.productId,
+      title: 'View Order',
+      action: 'view',
+      orderInfo: this.orderInfo,
+      id: id,
     };
     this.bsModalRef = this.modalService.show(ViewOrderComponent, {
       initialState,
