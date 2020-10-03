@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { OrderService } from 'src/app/component/services/order.service';
 
 @Component({
@@ -10,9 +11,10 @@ export class ViewOrderComponent implements OnInit {
   orderInfo: any;
   id: string;
   action: string;
+  title: string;
   savedData: any = [];
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService,public bsModalRef: BsModalRef,) {}
 
   async getOrderById(id) {
     let something = await this.orderService
