@@ -15,6 +15,8 @@ import { AddUserComponent } from './dialog/add-user/add-user.component';
 import { AddProductComponent } from './dialog/add-product/add-product.component';
 import { ProfileComponent } from './dialog/profile/profile.component';
 import { SettingsComponent } from './dialog/settings/settings.component';
+import { ViewOrderComponent } from './dialog/view-order/view-order.component';
+import { ViewInvoiceComponent } from './dialog/view-invoice/view-invoice.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { SettingsComponent } from './dialog/settings/settings.component';
     AddProductComponent,
     ProfileComponent,
     SettingsComponent,
+    ViewOrderComponent,
+    ViewInvoiceComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { OrderService } from 'src/app/component/services/order.service';
+import { ViewOrderComponent } from 'src/app/component/shared/dialog/view-order/view-order.component';
 
 @Component({
   selector: 'app-admin-orders',
@@ -7,11 +9,15 @@ import { OrderService } from 'src/app/component/services/order.service';
   styleUrls: ['./admin-orders.component.scss'],
 })
 export class AdminOrdersComponent implements OnInit {
+  bsModalRef: BsModalRef;
   config: any;
   collection = { count: 60, data: [] };
   orders: [];
 
-  constructor(private orderService: OrderService) {
+  constructor(
+    private orderService: OrderService,
+    private modalService: BsModalService
+  ) {
     this.orderService.getAllOrder().subscribe((data) => {
       this.collection.data = data.Orders;
       console.log(this.collection.data);
@@ -35,4 +41,18 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   processOrder() {}
+
+  openThisOrder() {
+    //console.log(this.ProductIDForm.value);
+    const initialState = {
+      title: 'Update Product',
+      action: 'update',
+      //query: this.ProductIDForm.value.productId,
+    };
+    this.bsModalRef = this.modalService.show(ViewOrderComponent, {
+      initialState,
+      class: 'modal-lg modal-dialog-centered',
+    });
+    this.bsModalRef.content.closeBtnName = 'Cancel';
+  }
 }
