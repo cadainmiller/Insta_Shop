@@ -125,6 +125,7 @@ exports.emailInvoiceById = async (req, res, next) => {
 
         sendData = invoice.invoiceDoc.toString();
         productid = invoice.order.toString();
+        customerEmail = invoice.order.customer_info.email.toString();
         id = invoice.invoiceId.toString();
         const [head, data] = sendData.split(",");
 
@@ -138,11 +139,10 @@ exports.emailInvoiceById = async (req, res, next) => {
         ]
 
         Email.SendEmail(
-          "TestEMail@test.com",
+          customerEmail,
           "Welocme to Company ",
           productid,
-          attachment
-          
+          attachment   
         );
         //console.log(productData);
         //getData(url);
