@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { OrderService } from 'src/app/component/services/order.service';
 
 @Component({
@@ -14,7 +20,10 @@ export class ViewOrderComponent implements OnInit {
   title: string;
   savedData: any = [];
 
-  constructor(private orderService: OrderService,public bsModalRef: BsModalRef,) {}
+  constructor(
+    private orderService: OrderService,
+    public bsModalRef: BsModalRef
+  ) {}
 
   async getOrderById(id) {
     let something = await this.orderService
@@ -28,13 +37,17 @@ export class ViewOrderComponent implements OnInit {
     console.log(this.savedData);
   }
 
+  OrderForm = new FormGroup({
+    orderId: new FormControl(''),
+  });
+
+
   ngOnInit(): void {
     if (this.action === 'view') {
       this.orderService.getOrderById(this.id).subscribe((data) => {
         let obj = data;
-        console.log(obj)
+        console.log(obj);
       });
-
     }
   }
 }
