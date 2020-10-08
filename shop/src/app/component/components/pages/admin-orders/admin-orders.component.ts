@@ -4,6 +4,7 @@ import { Invoice } from 'src/app/component/models/invoice.model';
 import { Order } from 'src/app/component/models/order.model';
 import { InvoiceService } from 'src/app/component/services/invoice.service';
 import { OrderService } from 'src/app/component/services/order.service';
+import { ViewInvoiceComponent } from 'src/app/component/shared/dialog/view-invoice/view-invoice.component';
 import { ViewOrderComponent } from 'src/app/component/shared/dialog/view-order/view-order.component';
 
 @Component({
@@ -69,5 +70,17 @@ export class AdminOrdersComponent implements OnInit {
       });
       this.bsModalRef.content.closeBtnName = 'Cancel';
     });
+  }
+
+  viewInvoice() {
+    const initialState = {
+      title: 'View Invoice',
+      action: 'view',
+    };
+    this.bsModalRef = this.modalService.show(ViewInvoiceComponent, {
+      initialState,
+      class: 'modal-lg modal-dialog-centered',
+    });
+    this.bsModalRef.content.closeBtnName = 'Cancel';
   }
 }
