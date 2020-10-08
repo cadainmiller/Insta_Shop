@@ -60,7 +60,9 @@
           "
         >
           <th scope="row">
-            <a class="text-primary" (click)=" openThisOrder(order.orderId)">{{ order.orderId }}</a>
+            <a class="text-primary" (click)="openThisOrder(order.orderId)">{{
+              order.orderId
+            }}</a>
           </th>
           <td>
             {{ order.status ? order.status : "&mdash;" }}
@@ -107,13 +109,18 @@
             }}
           </td>
           <td>
-            <button
-              type="button"
-              (click)="sendInvoice(order)"
-              class="btn btn-primary btn-sm"
-            >
-              Send Invoice
-            </button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button
+                type="button"
+                (click)="sendInvoice(order)"
+                class="btn btn-primary btn-sm"
+              >
+                Create Invoice
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm">
+                View Invoice
+              </button>
+            </div>  
           </td>
           <td>
             <button type="button" class="btn btn-primary btn-sm ml-2">
