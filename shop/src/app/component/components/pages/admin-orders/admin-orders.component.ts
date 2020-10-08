@@ -43,11 +43,11 @@ export class AdminOrdersComponent implements OnInit {
   ngOnInit(): void {}
 
   sendInvoice(order: Order) {
-    console.log(order);
+    console.log(order.orderId);
 
-    //this.invoiceService.createInvoice(orderI).subscribe((data) => {
-    //   console.log(data);
-    // });
+    this.invoiceService.createInvoice(order).subscribe((data) => {
+      console.log(data);
+    });
   }
 
   processOrder() {}
