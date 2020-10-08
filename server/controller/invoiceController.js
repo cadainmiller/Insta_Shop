@@ -43,11 +43,15 @@ const getData = async (url) => {
 
 exports.createInvoice = async (req, res) => {
   try {
-
-   const invoiceId = "INV-" + generateId();
-   const notes = req.body.notes;
+    const invoiceId = "INV-" + generateId();
+    const notes = req.body.notes;
     invoicepdf = await createDoc(
-      invoiceCreateDoc.create("INVOICE", "This is the subject", invoiceId, notes)
+      invoiceCreateDoc.create(
+        "INVOICE",
+        "This is the subject",
+        invoiceId,
+        notes
+      )
     );
 
     const orderId = req.body.orderId;
@@ -136,13 +140,13 @@ exports.emailInvoiceById = async (req, res, next) => {
             contentType: "application/pdf",
             encoding: "base64",
           },
-        ]
+        ];
 
         Email.SendEmail(
           customerEmail,
           "Welocme to Company ",
           productid,
-          attachment   
+          attachment
         );
         //console.log(productData);
         //getData(url);

@@ -2,7 +2,7 @@ import { Address } from './address.model';
 import { CustomerInfo } from './customerInfo.model';
 import { Product } from './product.model';
 
-export class Oder {
+export class Order {
   orderId = '';
   customer_info = CustomerInfo;
   products = [Product];

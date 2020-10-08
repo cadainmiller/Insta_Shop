@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Invoice } from 'src/app/component/models/invoice.model';
+import { Order } from 'src/app/component/models/order.model';
+import { InvoiceService } from 'src/app/component/services/invoice.service';
 import { OrderService } from 'src/app/component/services/order.service';
 import { ViewOrderComponent } from 'src/app/component/shared/dialog/view-order/view-order.component';
 
@@ -18,6 +21,7 @@ export class AdminOrdersComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
+    private invoiceService: InvoiceService,
     private modalService: BsModalService
   ) {
     this.orderService.getAllOrder().subscribe((data) => {
@@ -38,8 +42,12 @@ export class AdminOrdersComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  sendInvoice(orderID: string) {
-    console.log(orderID);
+  sendInvoice(order: Order) {
+    console.log(order);
+
+    //this.invoiceService.createInvoice(orderI).subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 
   processOrder() {}
