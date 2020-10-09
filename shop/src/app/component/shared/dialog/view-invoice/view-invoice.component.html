@@ -1,6 +1,7 @@
 <div class="card">
-    <h5 class="card-header">Featured</h5>
-    <div class="card-body">
-        <iframe src="{{invoiceDoc2}}" height="200" width="300"></iframe>
-    </div>
+  <h5 class="card-header">Featured</h5>
+  <div class="card-body">
+    <iframe [src]="pdfURL()" frameborder="0" height="800px" width="100%">
+    </iframe>
   </div>
+</div>
