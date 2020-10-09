@@ -53,9 +53,7 @@ export class AdminOrdersComponent implements OnInit {
 
   emailInvoice(id: String) {
     //console.log(id)
-    this.invoiceService.emailInvoiceByOrderId(id).subscribe((data) => {
-      
-    });
+    this.invoiceService.emailInvoiceByOrderId(id).subscribe((data) => {});
   }
 
   processOrder() {}
@@ -79,15 +77,20 @@ export class AdminOrdersComponent implements OnInit {
     });
   }
 
-  viewInvoice() {
-    const initialState = {
-      title: 'View Invoice',
-      action: 'view',
-    };
-    this.bsModalRef = this.modalService.show(ViewInvoiceComponent, {
-      initialState,
-      class: 'modal-lg modal-dialog-centered',
+  viewInvoice(id) {
+    this.invoiceService.getInvoiceByOrderId(id).subscribe((data) => {
+      let obj = data;
+      const initialState = {
+        title: 'View Invoice',
+        action: 'view',
+        orderId: id,
+        invoiceObj: obj,
+      };
+      this.bsModalRef = this.modalService.show(ViewInvoiceComponent, {
+        initialState,
+        class: 'modal-lg modal-dialog-centered',
+      });
+      this.bsModalRef.content.closeBtnName = 'Cancel';
     });
-    this.bsModalRef.content.closeBtnName = 'Cancel';
   }
 }
