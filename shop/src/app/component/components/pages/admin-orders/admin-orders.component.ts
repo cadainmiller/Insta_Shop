@@ -53,7 +53,7 @@ export class AdminOrdersComponent implements OnInit {
 
   emailInvoice(id: String) {
     //console.log(id)
-    this.invoiceService.emailInvoice(id).subscribe((data) => {
+    this.invoiceService.emailInvoiceByOrderId(id).subscribe((data) => {
       
     });
   }
