@@ -51,6 +51,11 @@ export class AdminOrdersComponent implements OnInit {
     });
   }
 
+  emailInvoice(id: String) {
+    console.log(id)
+    this.invoiceService.emailInvoice(id).subscribe((data) => {});
+  }
+
   processOrder() {}
 
   openThisOrder(id) {

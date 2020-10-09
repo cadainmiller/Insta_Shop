@@ -19,4 +19,11 @@ export class InvoiceService {
     });
   }
 
+  emailInvoice(id): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    return this.httpClient.get(environment.apiUrl + 'invoice/email/'+id, {
+      headers: headers,
+    });
+  }
+
 }
