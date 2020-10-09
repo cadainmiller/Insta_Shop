@@ -17,15 +17,14 @@ export class ViewInvoiceComponent implements OnInit {
   constructor(
     private invoiceService: InvoiceService,
     private dom: DomSanitizer
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-  //   console.log(this.orderId);
-  //   console.log(this.invoiceObj);
-  //   console.log(this.invoiceObj.invoice.invoiceDoc);
-  //  this.variable_name = this.dom.bypassSecurityTrustResourceUrl(this.invoiceObj.invoice.invoiceDoc); 
-  this.invoiceDoc = this.invoiceObj.invoice.invoiceDoc;
+    //   console.log(this.orderId);
+    //   console.log(this.invoiceObj);
+    //   console.log(this.invoiceObj.invoice.invoiceDoc);
+    //  this.variable_name = this.dom.bypassSecurityTrustResourceUrl(this.invoiceObj.invoice.invoiceDoc);
+    this.invoiceDoc = this.invoiceObj.invoice.invoiceDoc;
   }
 
   getInvoice(id: String) {
@@ -36,6 +35,8 @@ export class ViewInvoiceComponent implements OnInit {
   }
 
   pdfURL() {
-    return this.variable_name = this.dom.bypassSecurityTrustResourceUrl(this.invoiceObj.invoice.invoiceDoc); 
+    return (this.variable_name = this.dom.bypassSecurityTrustResourceUrl(
+      this.invoiceObj.invoice.invoiceDoc
+    ));
   }
 }
