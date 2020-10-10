@@ -1,6 +1,25 @@
 <div class="card">
-  <h5 class="card-header">Featured</h5>
+  <h5 class="card-header">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">Invoice</li>
+        <li class="breadcrumb-item active" aria-current="page">{{invoiceId}}</li>
+      </ol>
+    </nav>
+  </h5>
   <div class="card-body">
+    <div class="container m-2">
+      <div class="text-right">
+        <div
+          class="btn-group btn-group-sm text-right"
+          role="group"
+          aria-label="..."
+        >
+          <button type="button" class="btn btn-primary mr-2">Email Invoice</button>
+        </div>
+      </div>
+    </div>
+
     <iframe [src]="pdfURL()" frameborder="0" height="800px" width="100%">
     </iframe>
   </div>

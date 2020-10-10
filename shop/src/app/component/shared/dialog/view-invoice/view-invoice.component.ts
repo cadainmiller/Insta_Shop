@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ViewInvoiceComponent implements OnInit {
   orderId: string;
   invoiceDoc: string;
+  invoiceId: string;
   invoiceObj: any;
   invoiceDoc2 = ``;
   variable_name: any;
@@ -20,10 +21,7 @@ export class ViewInvoiceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //   console.log(this.orderId);
-    //   console.log(this.invoiceObj);
-    //   console.log(this.invoiceObj.invoice.invoiceDoc);
-    //  this.variable_name = this.dom.bypassSecurityTrustResourceUrl(this.invoiceObj.invoice.invoiceDoc);
+    this.invoiceId = this.invoiceObj.invoice.invoiceId;
     this.invoiceDoc = this.invoiceObj.invoice.invoiceDoc;
   }
 
