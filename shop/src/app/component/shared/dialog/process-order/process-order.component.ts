@@ -17,19 +17,19 @@ export class ProcessOrderComponent implements OnInit {
   });
 
   updateOrder(id: string, body: any) {
-    const updateOrderJson = {
-      id,
-      body,
-    };
+    const updateOrderJson = body;
+    const invoiceId = id;
 
-    return updateOrderJson;
+    return updateOrderJson + invoiceId;
   }
 
   ngOnInit(): void {
-    console.log(this.title);
+    console.log(this.order);
   }
 
   updateOrderStatus() {
-    alert(JSON.stringify(this.OrderUpdateForm.value));
+    console.log(
+      this.updateOrder(this.order.orderId, this.OrderUpdateForm.value)
+    );
   }
 }
