@@ -4,6 +4,7 @@ import { Invoice } from 'src/app/component/models/invoice.model';
 import { Order } from 'src/app/component/models/order.model';
 import { InvoiceService } from 'src/app/component/services/invoice.service';
 import { OrderService } from 'src/app/component/services/order.service';
+import { ProcessOrderComponent } from 'src/app/component/shared/dialog/process-order/process-order.component';
 import { ViewInvoiceComponent } from 'src/app/component/shared/dialog/view-invoice/view-invoice.component';
 import { ViewOrderComponent } from 'src/app/component/shared/dialog/view-order/view-order.component';
 
@@ -70,6 +71,21 @@ export class AdminOrdersComponent implements OnInit {
         savedData: this.savedData,
       };
       this.bsModalRef = this.modalService.show(ViewOrderComponent, {
+        initialState,
+        class: 'modal-lg modal-dialog-centered',
+      });
+      this.bsModalRef.content.closeBtnName = 'Cancel';
+    });
+  }
+
+  openUpdateOrder(id) {
+    this.orderService.getOrderById(id).subscribe((data) => {
+      let obj = data;
+      const initialState = {
+        title: 'Update Order',
+        order: obj,
+      };
+      this.bsModalRef = this.modalService.show(ProcessOrderComponent, {
         initialState,
         class: 'modal-lg modal-dialog-centered',
       });

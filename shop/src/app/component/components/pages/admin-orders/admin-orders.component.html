@@ -47,7 +47,7 @@
           <th scope="col">Street 1</th>
           <th scope="col">Street 2</th>
           <th scope="col">State/Parish</th>
-          <th scope="col">Send Invoice</th>
+          <th class="" scope="col">Invoice Actions</th>
           <th scope="col">Process Order</th>
           <th scope="col">Last Modify</th>
         </tr>
@@ -123,8 +123,8 @@
             </div>  
           </td>
           <td>
-            <button type="button" class="btn btn-primary btn-sm ml-2">
-              Send Order
+            <button type="button" class="btn btn-primary btn-sm ml-2" (click)="openUpdateOrder(order.orderId)">
+              Update Status
             </button>
           </td>
           <td>{{ order.updatedAt | date: "M/d/yy, h:mm a" }}</td>
