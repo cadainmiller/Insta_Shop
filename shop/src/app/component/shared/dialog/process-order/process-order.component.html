@@ -16,13 +16,13 @@
       </div>
       <div class="form-group mx-sm-3 mb-2">
         <select formControlName="status" id="inputState" class="form-control">
-          <option selected>Unpaid</option>
-          <option>Paid</option>
-          <option>Refunded</option>
-          <option>Cancel</option>
+          <option value="" selected>Unpaid</option>
+          <option value="Paid">Paid</option>
+          <option value="Refunded">Refunded</option>
+          <option value="Cancel">Cancel</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary mb-2">
+      <button (click)="updateOrderStatus()" class="btn btn-primary mb-2">
         Confirm identity
       </button>
     </form>

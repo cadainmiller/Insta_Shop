@@ -16,7 +16,20 @@ export class ProcessOrderComponent implements OnInit {
     status: new FormControl(''),
   });
 
+  updateOrder(id: string, body: any) {
+    const updateOrderJson = {
+      id,
+      body,
+    };
+
+    return updateOrderJson;
+  }
+
   ngOnInit(): void {
-    console.log(this.title)
+    console.log(this.title);
+  }
+
+  updateOrderStatus() {
+    alert(JSON.stringify(this.OrderUpdateForm.value));
   }
 }
