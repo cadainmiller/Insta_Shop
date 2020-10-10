@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-process-order',
@@ -10,6 +11,10 @@ export class ProcessOrderComponent implements OnInit {
   order: any;
 
   constructor() {}
+
+  OrderUpdateForm = new FormGroup({
+    status: new FormControl(''),
+  });
 
   ngOnInit(): void {
     console.log(this.title)
