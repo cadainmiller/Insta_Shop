@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { Invoice } from 'src/app/component/models/invoice.model';
 import { Order } from 'src/app/component/models/order.model';
 import { InvoiceService } from 'src/app/component/services/invoice.service';
@@ -24,7 +25,8 @@ export class AdminOrdersComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private invoiceService: InvoiceService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private toastr: ToastrService
   ) {
     this.orderService.getAllOrder().subscribe((data) => {
       this.collection.data = data.Orders;

@@ -15,7 +15,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './component/shared/shared.module';
@@ -30,7 +31,6 @@ import { HttpConfigInterceptor } from './component/interceptor/httpconfig.interc
 import { AdminProductsComponent } from './component/components/pages/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './component/components/pages/admin-orders/admin-orders.component';
 import { DatePipe } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +56,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AlertModule.forRoot(),
     NgxPaginationModule,
+    ToastrModule.forRoot(),
   ],
 
   providers: [
