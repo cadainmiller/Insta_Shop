@@ -16,11 +16,10 @@ export class ProcessOrderComponent implements OnInit {
     status: new FormControl(''),
   });
 
-  updateOrder(id: string, body: any) {
+  updateOrder(body: any) {
     const updateOrderJson = body;
-    const invoiceId = id;
-
-    return updateOrderJson + invoiceId;
+    //const invoiceId = id;
+    return updateOrderJson;
   }
 
   ngOnInit(): void {
@@ -29,7 +28,7 @@ export class ProcessOrderComponent implements OnInit {
 
   updateOrderStatus() {
     console.log(
-      this.updateOrder(this.order.orderId, this.OrderUpdateForm.value)
+      this.updateOrder(this.OrderUpdateForm.value)
     );
   }
 }
