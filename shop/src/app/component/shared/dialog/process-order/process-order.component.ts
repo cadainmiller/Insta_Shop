@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { OrderService } from 'src/app/component/services/order.service';
 
 @Component({
   selector: 'app-process-order',
@@ -10,7 +11,7 @@ export class ProcessOrderComponent implements OnInit {
   title: string;
   order: any;
 
-  constructor() {}
+  constructor(private orderService: OrderService) {}
 
   OrderUpdateForm = new FormGroup({
     status: new FormControl(''),
@@ -27,8 +28,12 @@ export class ProcessOrderComponent implements OnInit {
   }
 
   updateOrderStatus() {
-    console.log(
-      this.updateOrder(this.OrderUpdateForm.value)
-    );
+    console.log(this.updateOrder(this.OrderUpdateForm.value));
+
+    this.orderService
+      .updateByOrderId(this.order.orderId, this.OrderUpdateForm.value)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }
