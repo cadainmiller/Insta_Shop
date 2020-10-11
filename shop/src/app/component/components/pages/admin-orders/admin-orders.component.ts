@@ -87,7 +87,7 @@ export class AdminOrdersComponent implements OnInit {
       };
       this.bsModalRef = this.modalService.show(ProcessOrderComponent, {
         initialState,
-        class: 'modal-lg modal-dialog-centered',
+        class: 'modal-sm modal-dialog-centered',
       });
       this.bsModalRef.content.closeBtnName = 'Cancel';
     });
