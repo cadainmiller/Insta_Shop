@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { OrderService } from 'src/app/component/services/order.service';
 
@@ -14,7 +15,9 @@ export class ProcessOrderComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    public router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   OrderUpdateForm = new FormGroup({
@@ -36,14 +39,13 @@ export class ProcessOrderComponent implements OnInit {
   }
 
   updateOrderStatus() {
-    console.log(this.updateOrder(this.OrderUpdateForm.value));
-
     this.orderService
       .updateByOrderId(this.order.orderId, this.OrderUpdateForm.value)
       .subscribe((data) => {
         console.log(data);
         if (data) {
-          this.bsModalRef.hide()
+          this.bsModalRef.hide();
+          //this.router.navigate(['dashboard/order'], { relativeTo: this.route });
         }
       });
   }
