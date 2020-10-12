@@ -27,7 +27,7 @@ export class ViewInvoiceComponent implements OnInit {
 
   getInvoice(id: String) {
     this.invoiceService.getInvoiceByOrderId(id).subscribe((data) => {
-      console.log(data.invoice.invoiceDoc);
+      console.log(data);
       this.invoiceDoc = data.invoice.invoiceDoc;
     });
   }
@@ -36,5 +36,9 @@ export class ViewInvoiceComponent implements OnInit {
     return (this.variable_name = this.dom.bypassSecurityTrustResourceUrl(
       this.invoiceObj.invoice.invoiceDoc
     ));
+  }
+
+  emailInvoice(id: String) {
+    this.invoiceService.emailInvoiceByOrderId(this.orderId).subscribe((data) => {});
   }
 }

@@ -3,7 +3,9 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">Invoice</li>
-        <li class="breadcrumb-item active" aria-current="page">{{invoiceId}}</li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{ invoiceId }}
+        </li>
       </ol>
     </nav>
   </h5>
@@ -15,7 +17,13 @@
           role="group"
           aria-label="..."
         >
-          <button type="button" class="btn btn-primary mr-2">Email Invoice</button>
+          <button
+            (click)="emailInvoice(invoiceId)"
+            type="button"
+            class="btn btn-primary mr-2"
+          >
+            Email Invoice
+          </button>
         </div>
       </div>
     </div>
