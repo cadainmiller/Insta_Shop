@@ -29,4 +29,20 @@ export class UserService {
   getProtectedData(): Observable<any> {
     return this.httpClient.get(environment.apiUrl + 'user/');
   }
+
+  getUserBy(id): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    return this.httpClient.get(environment.apiUrl + 'user/' + id,{
+      headers: headers,
+    });
+  }
+
+  updateUserById (id, user: User): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(user);
+    return this.httpClient.put(environment.apiUrl + 'user/'+ id, body, {
+      headers: headers,
+    });
+  }
+
 }
