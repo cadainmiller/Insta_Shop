@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(this.loginForm.value).subscribe(
       (data) => {
         var user = {
+          id: data.userCredentials._id,
           name: data.userCredentials.name,
           email: data.userCredentials.email,
           user_image: data.userCredentials.user_image,

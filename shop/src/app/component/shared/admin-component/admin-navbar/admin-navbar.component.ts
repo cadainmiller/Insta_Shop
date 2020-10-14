@@ -5,6 +5,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SettingsComponent } from '../../dialog/settings/settings.component';
 import { ProfileComponent } from '../../dialog/profile/profile.component';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/component/services/user.service';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -13,11 +14,13 @@ import { Router } from '@angular/router';
 })
 export class AdminNavbarComponent implements OnInit {
   bsModalRef: BsModalRef;
+  userObj: any;
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
     private modalService: BsModalService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {}
@@ -34,14 +37,18 @@ export class AdminNavbarComponent implements OnInit {
   }
 
   openProfileModal() {
-    const initialState = {
-      title: 'Profile',
-    };
-    this.bsModalRef = this.modalService.show(ProfileComponent, {
-      initialState,
-      class: 'modal-lg modal-dialog-centered',
+    const userCred = JSON.parse(localStorage.getItem('UserInfo'));
+    this.userService.getUserBy(userCred.id).subscribe((data) => {
+      const initialState = {
+        title: 'Profile',
+        obj: data,
+      };
+      this.bsModalRef = this.modalService.show(ProfileComponent, {
+        initialState,
+        class: 'modal-lg modal-dialog-centered',
+      });
+      this.bsModalRef.content.closeBtnName = 'Close';
     });
-    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   logout() {
