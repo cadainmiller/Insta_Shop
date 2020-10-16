@@ -1,42 +1,28 @@
-<div class="card">
-  <div class="card-header">Featured</div>
-</div>
+<div *ngIf="userInfo.length > 0">
+  <div class="card">
+    <div class="card-header">Featured</div>
+  </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Role</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userInfo; let i = index">
+        <th scope="row">{{ i }}</th>
+        <td>{{ user.name ? user.name : "&mdash;" }}</td>
+        <td>{{ user.email ? user.email : "&mdash;" }}</td>
+        <td>{{ user.phone_number ? user.phone_number : "&mdash;" }}</td>
+        <td>{{ user.role ? user.role : "&mdash;" }}</td>
+        <td>{{ user.status ? user.status : "&mdash;" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
